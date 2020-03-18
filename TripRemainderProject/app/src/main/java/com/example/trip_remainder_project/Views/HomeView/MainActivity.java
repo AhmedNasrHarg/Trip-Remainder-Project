@@ -1,4 +1,4 @@
-package com.example.trip_remainder_project.Views;
+package com.example.trip_remainder_project.Views.HomeView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
