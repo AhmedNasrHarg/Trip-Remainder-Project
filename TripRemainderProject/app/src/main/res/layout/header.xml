@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:background="@drawable/logo"
+    android:padding="20sp">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/person"
+        >
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ahmed_Nasr"
+            android:textSize="16dp"
+            android:textColor="@color/design_default_color_primary"
+            android:textStyle="bold"
+            >
+
+        </TextView>
+
+
+</LinearLayout>
