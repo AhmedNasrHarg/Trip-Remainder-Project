@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:background="@drawable/logo"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:padding="20sp">
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/nav_header_imageView"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:src="@drawable/person"
@@ -15,6 +21,7 @@
     </androidx.appcompat.widget.AppCompatImageView>
 
         <TextView
+            android:id="@+id/nav_header_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ahmed_Nasr"
