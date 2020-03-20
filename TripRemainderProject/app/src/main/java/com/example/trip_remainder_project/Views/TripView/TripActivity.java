@@ -2,6 +2,7 @@ package com.example.trip_remainder_project.Views.TripView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Add New Trip");
 
 
        calDate = findViewById(R.id.calDate);
@@ -56,5 +60,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
 
 
+        //i was here
     }
 }
