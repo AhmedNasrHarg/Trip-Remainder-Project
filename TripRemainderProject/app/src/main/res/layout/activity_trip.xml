@@ -145,16 +145,20 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/cardview_light_background"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
 
+            app:title="Tripway"
+            app:titleEnabled="true"
             app:toolbarId="@+id/toolbar">
 
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
+                android:layout_height="?attr/actionBarSize"
+                app:title="Tripway"
+                app:titleTextColor="#FFFCFC"></androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
