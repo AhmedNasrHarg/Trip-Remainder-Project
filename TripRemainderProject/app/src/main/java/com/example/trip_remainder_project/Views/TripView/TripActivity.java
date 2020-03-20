@@ -18,5 +18,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Add New Trip");
 
+        //i was here
     }
 }
