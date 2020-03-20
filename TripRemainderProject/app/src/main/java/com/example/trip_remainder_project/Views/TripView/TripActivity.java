@@ -2,6 +2,7 @@ package com.example.trip_remainder_project.Views.TripView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
@@ -56,8 +57,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         c.set(Calendar.DAY_OF_MONTH , dayOfMonth);
         String date = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
         calDate.setText(date);
-
-
 
 
         //i was here
