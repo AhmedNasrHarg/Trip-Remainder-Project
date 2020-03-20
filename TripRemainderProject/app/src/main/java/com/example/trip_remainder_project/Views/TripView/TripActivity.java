@@ -13,5 +13,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip);
+
+        //i was here 
     }
 }
