@@ -1,6 +1,4 @@
-package com.example.trip_remainder_project.Views.Login;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.tripplanner.Views.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.trip_remainder_project.Models.LoginModel.LoginContract;
-import com.example.trip_remainder_project.Presenters.LoginPresenter.LoginPresenter;
-import com.example.trip_remainder_project.R;
-import com.example.trip_remainder_project.Views.HomeView.MainActivity;
-import com.example.trip_remainder_project.Views.Register.Register;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tripplanner.Models.LoginModel.LoginContract;
+import com.example.tripplanner.Presenters.LoginPresenter.LoginPresenter;
+import com.example.tripplanner.R;
+import com.example.tripplanner.Views.HomeView.MainActivity;
+import com.example.tripplanner.Views.Register.Register;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
