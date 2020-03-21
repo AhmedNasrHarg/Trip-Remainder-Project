@@ -15,8 +15,9 @@ public class RegisterPresenter implements RegisterContract.IPresenter{
     RegisterContract.IView regCont;
     private FirebaseAuth auth ;
 
-    public RegisterPresenter(FirebaseAuth auth) {
+    public RegisterPresenter(FirebaseAuth auth,RegisterContract.IView  view) {
         this.auth = auth;
+        this.regCont=view;
     }
 
     @Override

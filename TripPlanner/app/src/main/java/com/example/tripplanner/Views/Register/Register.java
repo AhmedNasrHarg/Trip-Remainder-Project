@@ -33,7 +33,7 @@ public class Register extends AppCompatActivity implements RegisterContract.IVie
         txtPass = findViewById(R.id.txtPass);
         txtPassw = findViewById(R.id.txtPassw);
         firebaseAuth = FirebaseAuth.getInstance();
-        presenter = new RegisterPresenter(firebaseAuth);
+        presenter = new RegisterPresenter(firebaseAuth,this);
         btnReges = findViewById(R.id.btnReges);
 
         btnReges.setOnClickListener(new View.OnClickListener() {
