@@ -24,7 +24,7 @@
         <activity android:name=".Views.TripView.TripActivity" />
         <activity android:name=".Views.HistoryView.History" />
         <activity
-            android:name=".Views.HomeView.MainActivity.MainActivity"
+            android:name=".Views.HomeView.MainActivity"
             android:label="@string/app_name" ></activity>
     </application>
 
