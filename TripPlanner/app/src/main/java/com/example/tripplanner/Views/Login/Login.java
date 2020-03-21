@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
             }
         });
 
