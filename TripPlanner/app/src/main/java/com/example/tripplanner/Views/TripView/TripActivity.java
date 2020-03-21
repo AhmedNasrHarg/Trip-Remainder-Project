@@ -42,7 +42,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Add New Trip");
-
         notifHelper = new NotificationHelper(this );
         c = Calendar.getInstance();
         calDate = findViewById(R.id.calDate);

@@ -85,6 +85,12 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         });
         trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
         trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
 
         recyclerView=findViewById(R.id.recyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);

@@ -54,7 +54,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="753dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         app:layout_anchor="@+id/constraintLayout2"
         app:layout_anchorGravity="center" />
