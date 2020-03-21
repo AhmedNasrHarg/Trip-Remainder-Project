@@ -7,6 +7,7 @@
     tools:context=".Views.HomeView.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.954"
             app:tint="@android:color/white" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -49,5 +51,13 @@
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
     </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="747dp"
+        android:layout_marginTop="48dp"
+        app:layout_anchor="@+id/constraintLayout2"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

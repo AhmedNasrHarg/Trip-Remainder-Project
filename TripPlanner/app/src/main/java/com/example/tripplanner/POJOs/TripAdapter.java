@@ -23,14 +23,19 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
     public TripAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View row=null;
         LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        row=layoutInflater.inflate(R.layout.message_row,parent,false);
+        row=layoutInflater.inflate(R.layout.trip_row,parent,false);
         ViewHolder holder=new ViewHolder(row);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull TripAdapter.ViewHolder holder, int position) {
-
+        holder.date.setText(items.get(position).getTripDate());
+        holder.time.setText(items.get(position).getTripTime());
+        holder.name.setText(items.get(position).getTripName());
+        holder.src.setText(items.get(position).getStartPoint());
+        holder.dest.setText(items.get(position).getEndPoint());
+        holder.type.setText(items.get(position).getTripType());
     }
 
     @Override
@@ -38,15 +43,23 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         return items.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
-//        public TextView title;
-//        public TextView body;
+        public TextView date;
+        public TextView time;
+        public TextView name;
+        public TextView src;
+        public TextView dest;
+        public TextView type;
         public View layout;
 
         public ViewHolder(View v){
             super(v);
             layout=v;
-//            title=v.findViewById(id.row_title);   // take care ids from custom row
-//            body=v.findViewById(id.row_body);
+            date=v.findViewById(R.id.dateId);   // take care ids from custom row
+            time=v.findViewById(R.id.timeId);
+            name=v.findViewById(R.id.tripId);   // take care ids from custom row
+            src=v.findViewById(R.id.srcId);
+            dest=v.findViewById(R.id.destId);   // take care ids from custom row
+            type=v.findViewById(R.id.statusId);
         }
 
     }

@@ -11,15 +11,19 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.Models.HomeModel.HomeContract;
 import com.example.tripplanner.POJOs.Trip;
+import com.example.tripplanner.POJOs.TripAdapter;
 import com.example.tripplanner.Presenters.HomePresenter.HomePresenter;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.HistoryView.History;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements HomeContract.IView {
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     private ActionBarDrawerToggle actionBarDrawerToggle;
     HomePresenter homePresenter;
 
+    RecyclerView recyclerView;
+    TripAdapter arrayAdapter;
+    RecyclerView.LayoutManager recyce;
+    ArrayList<Trip> trips=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,14 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                 return true;
             }
         });
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+
+        recyclerView=findViewById(R.id.recyclerView);
+        recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(recyce);
+        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripId,trips);
+        recyclerView.setAdapter(arrayAdapter);
     }
 
     @Override
