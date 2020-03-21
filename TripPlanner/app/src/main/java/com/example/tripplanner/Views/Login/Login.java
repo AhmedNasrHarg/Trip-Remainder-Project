@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         btnReg = findViewById(R.id.btnReg);
         btnGoogle = findViewById(R.id.btnGoogle);
         firebaseAuth = FirebaseAuth.getInstance();
-        presenter = new LoginPresenter(firebaseAuth);
+        presenter = new LoginPresenter(firebaseAuth,this);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override

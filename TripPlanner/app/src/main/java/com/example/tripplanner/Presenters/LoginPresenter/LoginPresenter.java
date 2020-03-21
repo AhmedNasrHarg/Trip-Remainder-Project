@@ -15,8 +15,9 @@ public class LoginPresenter implements LoginContract.IPresenter {
     LoginContract.IView loginCont;
     private FirebaseAuth auth ;
 
-    public LoginPresenter(FirebaseAuth auth) {
+    public LoginPresenter(FirebaseAuth auth,LoginContract.IView view) {
         this.auth = auth;
+        this.loginCont=view;
     }
 
     @Override
