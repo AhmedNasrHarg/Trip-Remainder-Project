@@ -5,12 +5,13 @@
 
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="787dp"
+        android:layout_height="match_parent"
         app:layout_anchor="@+id/constraintLayout"
         app:layout_anchorGravity="center">
 
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="88dp"
             android:text="Trip Name"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -46,12 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginLeft="36dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="68dp"
             android:ems="10"
             android:hint="Enter Trip Name"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,12 +129,12 @@
             android:id="@+id/addTripBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="32dp"
             android:text="Add Trip"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/switch2" />
 
         <Button
             android:id="@+id/calendar"
@@ -175,6 +176,17 @@
             app:layout_constraintEnd_toStartOf="@+id/time"
             app:layout_constraintTop_toBottomOf="@+id/calDate" />
 
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="16dp"
+            android:text="round Trip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -194,14 +206,17 @@
             app:toolbarId="@+id/toolbar">
 
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="Tripway"
-                app:titleTextColor="#FFFFFF"></androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_anchor="@+id/appbar"
+        app:layout_anchorGravity="center"
+        app:title="Tripway"
+        app:titleTextColor="#FFFFFF"></androidx.appcompat.widget.Toolbar>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
