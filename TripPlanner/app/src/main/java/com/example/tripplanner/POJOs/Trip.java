@@ -6,15 +6,20 @@ public class Trip {
     private String endPoint;
     private String tripDate;
     private String tripTime;
-    private String tripType;
+    private String tripType;    //round or oneWay
+    private String status;      // upcoming, or Cancelled, or Done
 
-    public Trip(String tripName, String startPoint, String endPoint, String tripDate, String tripTime, String tripType) {
+    public Trip() {
+    }
+
+    public Trip(String tripName, String startPoint, String endPoint, String tripDate, String tripTime, String tripType, String status) {
         this.tripName = tripName;
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.tripDate = tripDate;
         this.tripTime = tripTime;
         this.tripType = tripType;
+        this.status=status;
     }
 
     public String getTripName() {
@@ -63,5 +68,13 @@ public class Trip {
 
     public void setTripType(String tripType) {
         this.tripType = tripType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

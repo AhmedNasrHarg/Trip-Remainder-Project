@@ -10,7 +10,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -20,6 +23,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tripplanner.Models.TripModel.TripContract;
+import com.example.tripplanner.POJOs.Trip;
+import com.example.tripplanner.Presenters.TripPresenter.TripPresenter;
 import com.example.tripplanner.R;
 
 import java.text.DateFormat;
@@ -33,8 +38,14 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     TextView timeTxt;
     Calendar c;
     NotificationHelper notifHelper;
+    TripPresenter tripPresenter;
+    Switch type;
+    EditText tripName;
+    EditText startPoint;
+    EditText endPoint;
+    String toggleCheck="oneWay";
 
-
+    Button addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +53,34 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Add New Trip");
+        tripPresenter=new TripPresenter(this);
+        //ids
+        addBtn=findViewById(R.id.addTripBtn);
+        type=findViewById(R.id.switch2);
+        tripName=findViewById(R.id.tripName);
+        startPoint=findViewById(R.id.startPoint);
+        endPoint=findViewById(R.id.endPoint);
+        type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if(isChecked)
+                    toggleCheck="round";
+                else
+                    toggleCheck="oneWay";
+            }
+        });
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
+                ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming");
+                tripPresenter.addNewTrip(curTrip);
+            }
+        });
+
+
+
         notifHelper = new NotificationHelper(this );
         c = Calendar.getInstance();
         calDate = findViewById(R.id.calDate);
@@ -104,5 +143,11 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pi =  PendingIntent.getBroadcast(this , 1 , intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
+    }
+
+
+    @Override
+    public void addedNewTrip() {
+        finish();
     }
 }

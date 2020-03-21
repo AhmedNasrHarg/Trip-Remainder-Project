@@ -83,14 +83,14 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                 return true;
             }
         });
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
-        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
+//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
 
         recyclerView=findViewById(R.id.recyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
@@ -108,8 +108,18 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     }
 
     @Override
-    public void renderUpcomings(List<Trip> trips) {
+    protected void onStart() {
+        super.onStart();
+        // only add the upcoming trips, if the status is upcoming
+        homePresenter.handleUpcomings();
+        arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void renderUpcomings(ArrayList<Trip> trips) {
         // render here the trips on the recycler listView
+        this.trips=trips;
+
     }
 
     public void addNewTrip(View view) {
