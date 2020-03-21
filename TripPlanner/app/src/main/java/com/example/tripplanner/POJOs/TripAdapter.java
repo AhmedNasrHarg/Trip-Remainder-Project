@@ -38,7 +38,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         holder.name.setText(items.get(position).getTripName());
         holder.src.setText(items.get(position).getStartPoint());
         holder.dest.setText(items.get(position).getEndPoint());
-        holder.type.setText(items.get(position).getTripType());
+        holder.type.setText("Upcoming");
     }
 
     @Override
