@@ -1,10 +1,13 @@
 package com.example.tripplanner.POJOs;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,10 +53,19 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         public TextView dest;
         public TextView type;
         public View layout;
-
+        public void showNotes(View view) {
+            Log.i("nasr","hi");
+        }
         public ViewHolder(View v){
             super(v);
             layout=v;
+            Button noteBtn=v.findViewById(R.id.noteId);
+            noteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                showNotes(v);
+                }
+            });
             date=v.findViewById(R.id.dateId);   // take care ids from custom row
             time=v.findViewById(R.id.timeId);
             name=v.findViewById(R.id.tripId);   // take care ids from custom row

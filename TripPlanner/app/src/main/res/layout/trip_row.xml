@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingBottom="10dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/customborder"
+    android:paddingBottom="10dp">
 
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="20dp"
+        android:background="#706363"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,9 +61,9 @@
         android:id="@+id/statusId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginLeft="148dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="12dp"
         android:text="Upcoming"
         app:layout_constraintStart_toEndOf="@+id/tripId"
         app:layout_constraintTop_toBottomOf="@+id/timeId" />
@@ -69,10 +71,11 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="20dp"
+        android:background="#706363"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusId" />
@@ -117,10 +120,11 @@
         android:id="@+id/noteId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_note_black_24dp"
+        android:onClick="showNotes"
         app:layout_constraintStart_toEndOf="@+id/startId"
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
@@ -139,9 +143,8 @@
         android:id="@+id/menuBtnId"
         android:layout_width="51dp"
         android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
         android:background="@drawable/ic_menu_black_24dp"
         app:layout_constraintStart_toEndOf="@+id/timeId"
         app:layout_constraintTop_toTopOf="parent" />
