@@ -23,6 +23,8 @@ import com.example.tripplanner.R;
 import com.example.tripplanner.Views.HistoryView.History;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     HomePresenter homePresenter;
-
+    
     RecyclerView recyclerView;
     TripAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         // here is presenter handling
         homePresenter=new HomePresenter(this);
         homePresenter.handleUpcomings();
-
 
         Toolbar toolbar=findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
