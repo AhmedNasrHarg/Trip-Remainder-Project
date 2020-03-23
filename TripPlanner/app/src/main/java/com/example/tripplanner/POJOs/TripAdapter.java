@@ -20,7 +20,7 @@ import java.util.List;
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 
     private Context context;
-    private ArrayList<Trip> items;
+    private ArrayList<Trip> items=new ArrayList<>();
     @NonNull
     @Override
     public TripAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,9 +53,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         public TextView dest;
         public TextView type;
         public View layout;
+
         public void showNotes(View view) {
             Log.i("nasr","hi");
         }
+
         public ViewHolder(View v){
             super(v);
             layout=v;
@@ -66,11 +68,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                 showNotes(v);
                 }
             });
-            date=v.findViewById(R.id.dateId);   // take care ids from custom row
+            date=v.findViewById(R.id.dateId);
             time=v.findViewById(R.id.timeId);
-            name=v.findViewById(R.id.tripId);   // take care ids from custom row
+            name=v.findViewById(R.id.tripId);
             src=v.findViewById(R.id.srcId);
-            dest=v.findViewById(R.id.destId);   // take care ids from custom row
+            dest=v.findViewById(R.id.destId);
             type=v.findViewById(R.id.statusId);
         }
 

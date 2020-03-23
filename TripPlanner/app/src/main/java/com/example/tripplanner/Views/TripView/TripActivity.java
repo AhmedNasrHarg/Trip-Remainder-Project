@@ -44,6 +44,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     EditText startPoint;
     EditText endPoint;
     String toggleCheck="oneWay";
+    double longtiude;
+    double latitude;
 
     Button addBtn;
     @Override
@@ -74,7 +76,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             @Override
             public void onClick(View v) {
                 Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
-                ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming");
+                ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
                 tripPresenter.addNewTrip(curTrip);
             }
         });

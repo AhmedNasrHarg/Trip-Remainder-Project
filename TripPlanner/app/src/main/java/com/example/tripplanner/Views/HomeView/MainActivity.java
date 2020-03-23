@@ -68,11 +68,9 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                 if(id==R.id.upcomings){
                     menuItem.setCheckable(true);
                     menuItem.setChecked(true);
-                    Toast.makeText(getApplicationContext(),"go to upcomings",Toast.LENGTH_SHORT).show();
                 }else if(id == R.id.history){
                     menuItem.setCheckable(true);
                     menuItem.setChecked(true);
-                    Toast.makeText(getApplicationContext(),"go to history",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(), History.class);
                     startActivity(intent);
                 }else if(id==R.id.logout){
@@ -84,14 +82,6 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                 return true;
             }
         });
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
-//        trips.add(new Trip("Cairo","Baltim","Cairo","22-3-2020","10:20","oneWay","upcoming"));
 
         recyclerView=findViewById(R.id.recyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);

@@ -3,6 +3,8 @@ package com.example.tripplanner.Models.HomeModel;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.tripplanner.POJOs.Trip;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +22,7 @@ public class HomeModel implements HomeContract.IModel {
     HomeContract.IView view;
     public HomeModel(final HomeContract.IView view){
         this.view=view;
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again

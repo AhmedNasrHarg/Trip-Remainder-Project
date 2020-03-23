@@ -8,11 +8,13 @@ public class Trip {
     private String tripTime;
     private String tripType;    //round or oneWay
     private String status;      // upcoming, or Cancelled, or Done
+    private double longtiude;
+    private double latitude;
 
     public Trip() {
     }
 
-    public Trip(String tripName, String startPoint, String endPoint, String tripDate, String tripTime, String tripType, String status) {
+    public Trip(String tripName, String startPoint, String endPoint, String tripDate, String tripTime, String tripType, String status,double longtiude,double latitude) {
         this.tripName = tripName;
         this.startPoint = startPoint;
         this.endPoint = endPoint;
@@ -20,6 +22,8 @@ public class Trip {
         this.tripTime = tripTime;
         this.tripType = tripType;
         this.status=status;
+        this.longtiude=longtiude;
+        this.latitude=latitude;
     }
 
     public String getTripName() {
@@ -76,5 +80,21 @@ public class Trip {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public double getLongtiude() {
+        return longtiude;
+    }
+
+    public void setLongtiude(double longtiude) {
+        this.longtiude = longtiude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
