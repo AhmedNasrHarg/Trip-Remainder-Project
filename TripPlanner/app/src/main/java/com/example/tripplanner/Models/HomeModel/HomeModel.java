@@ -34,6 +34,7 @@ public class HomeModel implements HomeContract.IModel {
                     Trip curTrip=snapshot.getValue(Trip.class);
                     if(curTrip.getStatus().equals("Upcoming"))
                         trips.add(curTrip);
+                    HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
                 }
                 // we must notify that we have loaded all trips coz it is running in a different thread, so we can see
                 // trips on after activity loaded not else

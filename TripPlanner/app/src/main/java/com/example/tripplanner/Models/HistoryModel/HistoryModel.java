@@ -35,6 +35,7 @@ public class HistoryModel implements HistoryContract.IModel {
                     Trip curTrip=snapshot.getValue(Trip.class);
                     if(!curTrip.getStatus().equals("Upcoming")){
                         trips.add(curTrip);
+                        HistoryModel.this.view.arrayAdapter.notifyDataSetChanged();
                     }
                 }
                 // we must notify that we have loaded all trips coz it is running in a different thread, so we can see
