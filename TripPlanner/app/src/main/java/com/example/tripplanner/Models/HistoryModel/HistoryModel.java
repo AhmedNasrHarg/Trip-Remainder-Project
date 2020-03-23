@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tripplanner.POJOs.Trip;
+import com.example.tripplanner.Views.HistoryView.History;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,9 +19,9 @@ public class HistoryModel implements HistoryContract.IModel {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("trips");
     ArrayList<Trip>trips=new ArrayList<>();
-    HistoryContract.IView view;
+    History view;
 
-    public HistoryModel(final HistoryContract.IView view){
+    public HistoryModel(final History view){
 //        myRef.child("test").setValue("test");
         this.view=view;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -34,9 +35,11 @@ public class HistoryModel implements HistoryContract.IModel {
                     Trip curTrip=snapshot.getValue(Trip.class);
                     if(!curTrip.getStatus().equals("Upcoming")){
                         trips.add(curTrip);
-                        Log.i("nnnnnnnnnn","mmmmmmmmmm");
                     }
                 }
+                // we must notify that we have loaded all trips coz it is running in a different thread, so we can see
+                // trips on after activity loaded not else
+                HistoryModel.this.view.arrayAdapter.notifyDataSetChanged();
             }
 
             @Override

@@ -3,6 +3,7 @@ package com.example.tripplanner.Presenters.HistoryPresenter;
 import com.example.tripplanner.Models.HistoryModel.HistoryContract;
 import com.example.tripplanner.Models.HistoryModel.HistoryModel;
 import com.example.tripplanner.POJOs.Trip;
+import com.example.tripplanner.Views.HistoryView.History;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class HistoryPresenter implements HistoryContract.IPresenter {
 
     public HistoryPresenter(HistoryContract.IView view){
         this.view=view;
-        this.model=new HistoryModel(view);
+        this.model=new HistoryModel((History) view);
     }
 
     @Override

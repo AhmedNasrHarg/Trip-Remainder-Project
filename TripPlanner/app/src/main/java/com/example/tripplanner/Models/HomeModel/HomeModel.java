@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.tripplanner.POJOs.Trip;
+import com.example.tripplanner.Views.HomeView.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,8 +20,8 @@ public class HomeModel implements HomeContract.IModel {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("trips");
     ArrayList<Trip>trips=new ArrayList<>();
-    HomeContract.IView view;
-    public HomeModel(final HomeContract.IView view){
+    MainActivity view;
+    public HomeModel(final MainActivity view){
         this.view=view;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -34,6 +35,9 @@ public class HomeModel implements HomeContract.IModel {
                     if(curTrip.getStatus().equals("Upcoming"))
                         trips.add(curTrip);
                 }
+                // we must notify that we have loaded all trips coz it is running in a different thread, so we can see
+                // trips on after activity loaded not else
+                HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
             }
 
             @Override

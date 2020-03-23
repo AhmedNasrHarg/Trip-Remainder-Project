@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     HomePresenter homePresenter;
     
     RecyclerView recyclerView;
-    TripAdapter arrayAdapter;
+    public TripAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
     ArrayList<Trip> trips=new ArrayList<>();
 
@@ -45,9 +45,12 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // here is presenter handling
         homePresenter=new HomePresenter(this);
         homePresenter.handleUpcomings();
+
+
 
         Toolbar toolbar=findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
@@ -82,12 +85,12 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                 return true;
             }
         });
-
         recyclerView=findViewById(R.id.recyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(recyce);
         arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripId,trips);
         recyclerView.setAdapter(arrayAdapter);
+
     }
 
     @Override

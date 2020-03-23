@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class History extends AppCompatActivity implements HistoryContract.IView {
 
     RecyclerView recyclerView;
-    TripAdapter arrayAdapter;
+    public TripAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
     ArrayList<Trip> trips=new ArrayList<>();
     HistoryPresenter historyPresenter;
