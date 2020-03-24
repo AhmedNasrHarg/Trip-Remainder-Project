@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPresenter implements LoginContract.IPresenter {
     LoginContract.IView loginCont;
@@ -42,7 +43,8 @@ public class LoginPresenter implements LoginContract.IPresenter {
 
     @Override
     public void checkLogin() {
-        if (auth.getCurrentUser() != null)
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null)
             loginCont.isLogin(true);
         else
             loginCont.isLogin(false);

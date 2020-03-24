@@ -71,8 +71,6 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
     @Override
     public void loginSuccess() {
         Toast.makeText(Login.this, "Login success", Toast.LENGTH_SHORT);
-//        Intent i = new Intent(Login.this, MainActivity.class);
-//        startActivity(i);
     }
 
     @Override
@@ -83,7 +81,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
 
     @Override
     public void isLogin(boolean isLogin) {
-        if (isLogin == true) {
+        if (isLogin) {
             Intent i = new Intent(Login.this,MainActivity.class);
             startActivity(i);
         } else {
