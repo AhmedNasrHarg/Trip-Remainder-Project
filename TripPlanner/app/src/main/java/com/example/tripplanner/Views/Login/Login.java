@@ -70,8 +70,9 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
 
     @Override
     public void loginSuccess() {
-        Intent i = new Intent(Login.this, MainActivity.class);
-        startActivity(i);
+        Toast.makeText(Login.this, "Login success", Toast.LENGTH_SHORT);
+//        Intent i = new Intent(Login.this, MainActivity.class);
+//        startActivity(i);
     }
 
     @Override
