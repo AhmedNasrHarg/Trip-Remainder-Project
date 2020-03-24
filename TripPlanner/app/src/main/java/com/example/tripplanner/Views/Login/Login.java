@@ -2,6 +2,7 @@ package com.example.tripplanner.Views.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.example.tripplanner.Views.HomeView.MainActivity;
 import com.example.tripplanner.Views.Register.Register;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity implements LoginContract.IView {
     EditText emailTxt;
@@ -77,11 +79,14 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT);
     }
 
+
     @Override
     public void isLogin(boolean isLogin) {
-        if (isLogin) {
-            Intent i = new Intent(Login.this, MainActivity.class);
-            finish();
+        if (isLogin == true) {
+            Intent i = new Intent(Login.this,MainActivity.class);
+            startActivity(i);
+        } else {
+            Log.d("sign","onAuthStateChanged:signed_out");
         }
     }
 }

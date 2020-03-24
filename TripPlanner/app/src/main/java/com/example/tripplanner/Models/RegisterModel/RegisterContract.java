@@ -5,7 +5,7 @@ public class RegisterContract {
         void regValidations();
         void regSuccess();
         void regError();
-        void isreg(boolean isReg);
+
     }
 
     public interface IPresenter{
