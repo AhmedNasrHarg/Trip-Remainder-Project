@@ -79,22 +79,14 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT);
     }
 
+
     @Override
-    public void checkCurrentUser() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null){
+    public void isLogin(boolean isLogin) {
+        if (isLogin == true) {
             Intent i = new Intent(Login.this,MainActivity.class);
             startActivity(i);
         } else {
             Log.d("sign","onAuthStateChanged:signed_out");
-        }
-    }
-
-    @Override
-    public void isLogin(boolean isLogin) {
-        if (isLogin) {
-            Intent i = new Intent(Login.this, MainActivity.class);
-            finish();
         }
     }
 }
