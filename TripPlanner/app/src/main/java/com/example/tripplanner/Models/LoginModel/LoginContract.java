@@ -6,6 +6,7 @@ public class LoginContract {
         void loginValidations();
         void loginSuccess();
         void loginError();
+        void checkCurrentUser();
         void isLogin(boolean isLogin);
     }
 

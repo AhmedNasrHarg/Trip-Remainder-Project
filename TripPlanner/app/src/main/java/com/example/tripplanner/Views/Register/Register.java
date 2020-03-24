@@ -65,12 +65,5 @@ public class Register extends AppCompatActivity implements RegisterContract.IVie
         Toast.makeText(Register.this , "Registeration Faild" , Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void isreg(boolean isReg) {
-        if (isReg) {
-            Intent i = new Intent(Register.this, Login.class);
-            finish();
-        }
 
-    }
 }
