@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
     EditText passTxt;
     Button btnLogin;
     Button btnReg;
-    Button btnGoogle;
+  //  Button btnGoogle;
     FirebaseAuth firebaseAuth;
     GoogleSignInClient mGoogleSignInClient;
     private LoginPresenter presenter;
@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         passTxt = findViewById(R.id.passTxt);
         btnLogin = findViewById(R.id.btnLogin);
         btnReg = findViewById(R.id.btnReg);
-        btnGoogle = findViewById(R.id.btnGoogle);
+     //   btnGoogle = findViewById(R.id.btnGoogle);
         firebaseAuth = FirebaseAuth.getInstance();
         presenter = new LoginPresenter(firebaseAuth,this);
 
