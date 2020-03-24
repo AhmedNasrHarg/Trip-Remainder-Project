@@ -78,11 +78,13 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             public void onClick(View v) {
                 if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
                 && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
+
                 Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
                 ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
+                curTrip.addNewNote("Java");
                 tripPresenter.addNewTrip(curTrip);
                 }else{
-                    Toast.makeText(getApplicationContext(),"Please fill all data",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
                 }
             }
         });

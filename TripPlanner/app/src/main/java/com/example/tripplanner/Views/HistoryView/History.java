@@ -14,7 +14,7 @@ import com.example.tripplanner.R;
 
 import java.util.ArrayList;
 
-public class History extends AppCompatActivity implements HistoryContract.IView {
+public class History extends AppCompatActivity implements HistoryContract.IView, TripAdapter.OnTripListener {
 
     RecyclerView recyclerView;
     public TripAdapter arrayAdapter;
@@ -33,7 +33,7 @@ public class History extends AppCompatActivity implements HistoryContract.IView 
         recyclerView=findViewById(R.id.historyRecyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(recyce);
-        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripId,trips);
+        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripId,trips,this);
         recyclerView.setAdapter(arrayAdapter);
     }
 
@@ -47,5 +47,10 @@ public class History extends AppCompatActivity implements HistoryContract.IView 
     @Override
     public void renderHistory(ArrayList<Trip> trips) {
         this.trips=trips;
+    }
+
+    @Override
+    public void onTripClick(int position) {
+        // here we navigate to details of current Trip
     }
 }

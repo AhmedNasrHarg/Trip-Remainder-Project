@@ -1,5 +1,6 @@
 package com.example.tripplanner.POJOs;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.R;
+import com.example.tripplanner.Views.HomeView.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.List;
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 
     private Context context;
+    OnTripListener onTripListener;
     private ArrayList<Trip> items=new ArrayList<>();
     @NonNull
     @Override
@@ -27,7 +30,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         View row=null;
         LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         row=layoutInflater.inflate(R.layout.trip_row,parent,false);
-        ViewHolder holder=new ViewHolder(row);
+        ViewHolder holder=new ViewHolder(row,onTripListener);
         return holder;
     }
 
@@ -45,7 +48,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
     public int getItemCount() {
         return items.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView date;
         public TextView time;
         public TextView name;
@@ -55,12 +58,16 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         public View layout;
 
         public void showNotes(View view) {
-            Log.i("nasr","hi");
+//            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+//            builder.setTitle("Notes");
+//            builder.setIcon(R.drawable.ic_note_black_24dp).create().show();
         }
-
-        public ViewHolder(View v){
+        OnTripListener onTripListener;
+        public ViewHolder(View v,OnTripListener onTripListener){
             super(v);
             layout=v;
+            this.onTripListener=onTripListener;
+            v.setOnClickListener(this);
             Button noteBtn=v.findViewById(R.id.noteId);
             noteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,10 +83,18 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
             type=v.findViewById(R.id.statusId);
         }
 
+        @Override
+        public void onClick(View v) {
+            onTripListener.onTripClick(getAdapterPosition());
+        }
+    }
+    public  interface OnTripListener{
+        public void  onTripClick(int position);
     }
 
-    public TripAdapter(@NonNull Context context, int resource, int textViewResourceId, List items) {
+    public TripAdapter(@NonNull Context context, int resource, int textViewResourceId, List items,OnTripListener onTripListener) {
         this.context=context;
         this.items= (ArrayList<Trip>) items;
+        this.onTripListener=onTripListener;
     }
 }

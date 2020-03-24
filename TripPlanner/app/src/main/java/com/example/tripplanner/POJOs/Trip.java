@@ -1,6 +1,12 @@
 package com.example.tripplanner.POJOs;
 
-public class Trip {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Trip implements Serializable {
     private String tripName;
     private String startPoint;
     private String endPoint;
@@ -10,6 +16,7 @@ public class Trip {
     private String status;      // upcoming, or Cancelled, or Done
     private double longtiude;
     private double latitude;
+    private ArrayList<String> notes= new ArrayList<>();
 
     public Trip() {
     }
@@ -24,6 +31,12 @@ public class Trip {
         this.status=status;
         this.longtiude=longtiude;
         this.latitude=latitude;
+    }
+    public void addNewNote(String note){
+        notes.add(note);
+    }
+    public ArrayList<String> getNotes(){
+        return notes;
     }
 
     public String getTripName() {
@@ -97,4 +110,6 @@ public class Trip {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+
 }
