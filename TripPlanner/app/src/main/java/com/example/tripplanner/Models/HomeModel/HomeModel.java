@@ -46,6 +46,28 @@ public class HomeModel implements HomeContract.IModel {
                 // Failed to read value
                 Toast.makeText((Context) HomeModel.this.view,"err",Toast.LENGTH_SHORT).show();
             }
+        }
+        );
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               trips.clear();
+
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Trip curTrip=snapshot.getValue(Trip.class);
+                    if(curTrip.getStatus().equals("Upcoming"))
+                        trips.add(curTrip);
+                    HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
+                }
+                // we must notify that we have loaded all trips coz it is running in a different thread, so we can see
+                // trips on after activity loaded not else
+                HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
     }
     public ArrayList<Trip> getUpcomings(String user){
