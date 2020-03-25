@@ -1,4 +1,0 @@
-#Fri Mar 20 13:44:28 EET 2020
-base.0=/mnt/data/code/android/TripProject/Trip-Remainder-Project/TripRemainderProject/app/build/intermediates/dex/debug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
