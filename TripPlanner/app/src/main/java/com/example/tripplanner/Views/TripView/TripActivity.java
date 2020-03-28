@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
@@ -31,7 +33,7 @@ import com.example.tripplanner.R;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class TripActivity extends AppCompatActivity implements TripContract.IView , DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener  {
+public class TripActivity extends AppCompatActivity implements TripContract.IView , DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener {
 
     Button cal;
     Button time;
@@ -153,7 +155,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
 
     }
-
 
     @Override
     public void addedNewTrip() {
