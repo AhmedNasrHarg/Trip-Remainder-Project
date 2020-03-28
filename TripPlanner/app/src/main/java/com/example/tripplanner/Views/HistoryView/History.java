@@ -1,23 +1,27 @@
 package com.example.tripplanner.Views.HistoryView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tripplanner.Adapters.HistoryAdapter;
 import com.example.tripplanner.Models.HistoryModel.HistoryContract;
 import com.example.tripplanner.POJOs.Trip;
-import com.example.tripplanner.POJOs.TripAdapter;
+import com.example.tripplanner.Adapters.TripAdapter;
 import com.example.tripplanner.Presenters.HistoryPresenter.HistoryPresenter;
 import com.example.tripplanner.R;
+import com.example.tripplanner.Views.HomeView.MainActivity;
+import com.example.tripplanner.Views.TripDetails.TripDetails;
 
 import java.util.ArrayList;
 
-public class History extends AppCompatActivity implements HistoryContract.IView, TripAdapter.OnTripListener {
+public class History extends AppCompatActivity implements HistoryContract.IView, HistoryAdapter.OnHistoryListener {
 
     RecyclerView recyclerView;
-    public TripAdapter arrayAdapter;
+    public HistoryAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
     ArrayList<Trip> trips=new ArrayList<>();
     HistoryPresenter historyPresenter;
@@ -33,7 +37,7 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
         recyclerView=findViewById(R.id.historyRecyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(recyce);
-        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripId,trips,this);
+        arrayAdapter=new HistoryAdapter(getApplicationContext(),R.layout.history_row ,R.id.tripIdHist,trips,  this);
         recyclerView.setAdapter(arrayAdapter);
     }
 
@@ -49,8 +53,12 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
         this.trips=trips;
     }
 
+
+
     @Override
-    public void onTripClick(int position) {
-        // here we navigate to details of current Trip
+    public void onHistoryClick(int position) {
+        Intent intent=new Intent(History.this, TripDetails.class);
+        intent.putExtra("curTrip",trips.get(position));
+        startActivity(intent);
     }
 }
