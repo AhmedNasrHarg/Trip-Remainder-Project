@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -47,12 +46,41 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             @Override
             public void onClick(View v) {
                showDialog(position);
-                //create().show();
+            }
+        });
+
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteDialog(position);
             }
         });
 
     }
 
+    public void showDeleteDialog(int position){
+//        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
+        AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
+        myQuittingDialogBox.setTitle("Delete")
+                .setMessage("Are you sure you want to Delete this trip ?")
+                .setIcon(R.drawable.ic_delete_black_24dp)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+    }
     public void showDialog(int position){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setTitle("Trip Notes").setIcon(R.drawable.ic_note_black_24dp);
@@ -84,7 +112,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         public TextView dest;
         public TextView type;
         public Button notesBtn;
-        public Button menuBtn;
+        public Button deleteBtn;
         public View layout;
 
         public void showNotes(View view) {
@@ -112,7 +140,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             dest=v.findViewById(R.id.destIdHist);
             type=v.findViewById(R.id.statusIdHist);
             notesBtn=v.findViewById(R.id.noteIdHist);
-            menuBtn=v.findViewById(R.id.menuBtnIdHist);
+            deleteBtn=v.findViewById(R.id.deleteBtnIdHist);
         }
 
         @Override

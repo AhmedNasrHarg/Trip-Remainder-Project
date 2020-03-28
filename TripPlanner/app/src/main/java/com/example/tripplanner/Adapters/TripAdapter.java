@@ -55,13 +55,13 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup(v);
+                showPopup(v,position);
             }
         });
         holder.notesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(position);
+                showNotesDialog(position);
             }
         });
 
@@ -73,7 +73,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         });
     }
     @SuppressLint("RestrictedApi")
-    public void showPopup(View v) {
+    public void showPopup(View v, final int position) {
         // to show popup
         final PopupMenu popup = new PopupMenu(context, v);
 //        popup.setOnMenuItemClickListener((TripActivity) context);
@@ -93,7 +93,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         // can edit trip
                         return true;
                     case R.id.DeleteTrip:
-                        //delete trip and add it to history as cancelled
+                        //show dialog to confirm first & delete trip and add it to history as cancelled
+                        showDeleteDialog(position);
                         return true;
                     case R.id.cancelMenu:
                         popup.dismiss();
@@ -117,7 +118,30 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
     }
-    public void showDialog(int position){
+    public void showDeleteDialog(int position){
+//        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
+        AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
+        myQuittingDialogBox.setTitle("Delete")
+                .setMessage("Are you sure you want to Delete this trip ?")
+                .setIcon(R.drawable.ic_delete_black_24dp)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+    }
+    public void showNotesDialog(int position){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setTitle("Trip Notes").setIcon(R.drawable.ic_note_black_24dp);
         ArrayList<String> li=items.get(position).getNotes();
