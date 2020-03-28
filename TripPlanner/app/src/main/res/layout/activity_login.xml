@@ -45,8 +45,8 @@
 
     <EditText
         android:id="@+id/passTxt"
-        android:layout_width="156dp"
-        android:layout_height="34dp"
+        android:layout_width="152dp"
+        android:layout_height="47dp"
         android:layout_marginEnd="44dp"
         android:layout_marginRight="44dp"
         android:ems="10"
@@ -59,14 +59,14 @@
         android:id="@+id/btnLogin"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="72dp"
         android:background="@android:color/holo_blue_light"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="@string/login"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.579"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -76,7 +76,7 @@
         android:layout_height="51dp"
         android:layout_marginStart="61dp"
         android:layout_marginLeft="61dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="44dp"
         android:layout_marginRight="44dp"
         android:background="@android:color/holo_blue_light"
@@ -85,33 +85,21 @@
         android:text="@string/btn"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-<!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/btnGoogle"-->
-<!--        android:layout_width="290dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginTop="44dp"-->
-<!--        android:scrollbarSize="4dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.547"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/btnReg"-->
-<!--        tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>-->
-    <!--    <Button-->
-<!--        android:id="@+id/btnGoogle"-->
-<!--        android:layout_width="289dp"-->
-<!--        android:layout_height="52dp"-->
-<!--        android:layout_marginTop="48dp"-->
-<!--        android:background="@android:color/holo_blue_light"-->
-<!--        android:fontFamily="sans-serif-medium"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/google"-->
-<!--        android:textSize="24sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.574"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/btnReg" />-->
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogle"
+        android:layout_width="293dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="40dp"
+        android:scrollbarSize="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnReg"
+        tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

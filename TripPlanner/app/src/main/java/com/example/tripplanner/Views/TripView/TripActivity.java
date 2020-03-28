@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tripplanner.Models.TripModel.TripContract;
+import com.example.tripplanner.POJOs.PlaceAutoSuggestAdapter;
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.Presenters.TripPresenter.TripPresenter;
 import com.example.tripplanner.R;
@@ -42,8 +43,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     TripPresenter tripPresenter;
     Switch type;
     EditText tripName;
-    EditText startPoint;
-    EditText endPoint;
+    TextView startPoint;
+    TextView endPoint;
     String toggleCheck="oneWay";
     double longtiude;
     double latitude;
@@ -62,7 +63,9 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         type=findViewById(R.id.switch2);
         tripName=findViewById(R.id.tripName);
         startPoint=findViewById(R.id.startPoint);
+     //   startPoint.setAdapter(new PlaceAutoSuggestAdapter(TripActivity.this,android.R.layout.simple_list_item_1));
         endPoint=findViewById(R.id.endPoint);
+    //    endPoint.setAdapter(new PlaceAutoSuggestAdapter(TripActivity.this,android.R.layout.simple_list_item_1));
         type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
@@ -105,7 +108,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             public void onClick(View v) {
 
 
-                DialogFragment datePicker = new com.example.tripplanner.Views.TripView.DatePickerFrag();
+                DialogFragment datePicker = new DatePickerFrag();
                 datePicker.show(getSupportFragmentManager() , "date picker");
             }
         });

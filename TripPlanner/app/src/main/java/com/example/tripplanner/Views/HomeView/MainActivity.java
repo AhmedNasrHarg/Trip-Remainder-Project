@@ -22,9 +22,11 @@ import com.example.tripplanner.POJOs.TripAdapter;
 import com.example.tripplanner.Presenters.HomePresenter.HomePresenter;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.HistoryView.History;
+import com.example.tripplanner.Views.Login.Login;
 import com.example.tripplanner.Views.TripDetails.TripDetails;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     HomePresenter homePresenter;
-    
+    FirebaseAuth auth;
     RecyclerView recyclerView;
     public TripAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
@@ -82,6 +84,11 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                     menuItem.setCheckable(true);
                     menuItem.setChecked(true);
                     Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
+                    auth.getInstance().signOut();
+                    finish();
+                    Intent intent=new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
+
                 }
                 drawerLayout.closeDrawers();
                 return true;
