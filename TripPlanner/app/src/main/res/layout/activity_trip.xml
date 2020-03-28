@@ -183,7 +183,7 @@
             android:layout_marginStart="56dp"
             android:layout_marginLeft="56dp"
             android:layout_marginTop="16dp"
-            android:text="round Trip"
+            android:text="Round Trip"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time" />
 
@@ -201,7 +201,7 @@
             app:contentScrim="@color/cardview_light_background"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
 
-            app:title="Tripway"
+            app:title="Tripsy"
             app:titleEnabled="true"
             app:toolbarId="@+id/toolbar">
 
@@ -215,7 +215,7 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_anchor="@+id/appbar"
         app:layout_anchorGravity="center"
-        app:title="Tripway"
+        app:title="Tripsy"
         app:titleTextColor="#FFFFFF"></androidx.appcompat.widget.Toolbar>
 
 
