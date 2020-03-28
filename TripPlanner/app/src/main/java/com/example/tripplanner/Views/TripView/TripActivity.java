@@ -37,8 +37,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     Button time;
     TextView calDate;
     TextView timeTxt;
-    Calendar c;
-    NotificationHelper notifHelper;
+    Calendar calendar;
+  //  NotificationHelper notifHelper;
     TripPresenter tripPresenter;
     Switch type;
     EditText tripName;
@@ -63,6 +63,14 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         tripName=findViewById(R.id.tripName);
         startPoint=findViewById(R.id.startPoint);
         endPoint=findViewById(R.id.endPoint);
+        calDate = findViewById(R.id.calDate);
+        time = findViewById(R.id.time);
+        timeTxt = findViewById(R.id.timeText);
+        cal = findViewById(R.id.calendar);
+        time.setBackgroundResource(R.drawable.ala);
+        cal.setBackgroundResource(R.drawable.calendar7);
+
+
         type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
@@ -74,8 +82,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             }
         });
         addBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                startAlarm(calendar);
                 if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
                 && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
 
@@ -89,16 +99,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             }
         });
 
-
-
-        notifHelper = new NotificationHelper(this );
-        c = Calendar.getInstance();
-        calDate = findViewById(R.id.calDate);
-        time = findViewById(R.id.time);
-        timeTxt = findViewById(R.id.timeText);
-        cal = findViewById(R.id.calendar);
-        time.setBackgroundResource(R.drawable.ala);
-        cal.setBackgroundResource(R.drawable.calendar7);
+       // notifHelper = new NotificationHelper(this );
+        calendar = Calendar.getInstance();
 
         cal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,11 +125,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-       // Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR , year);
-        c.set(Calendar.MONTH , month);
-        c.set(Calendar.DAY_OF_MONTH , dayOfMonth);
-        String date = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        calendar.set(Calendar.YEAR , year);
+        calendar.set(Calendar.MONTH , month);
+        calendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         calDate.setText(date);
     }
 
@@ -137,22 +138,20 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
 
-        c.set(Calendar.MINUTE , minute);
-        c.set(Calendar.HOUR_OF_DAY , hourOfDay);
-        c.set(Calendar.SECOND , 0);
+        calendar.set(Calendar.MINUTE , minute);
+        calendar.set(Calendar.HOUR_OF_DAY , hourOfDay);
+        calendar.set(Calendar.SECOND , 0);
         timeTxt.setText(String.valueOf(hourOfDay)+ " : " + String.valueOf(minute));
-        startAlarm(c);
+    //    startAlarm(c);
     }
-
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void startAlarm(Calendar c) {
         AlarmManager alarmang = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlertReceiver.class);
+        Intent intent = new Intent(this, ReminderBroadcast.class);
         PendingIntent pi =  PendingIntent.getBroadcast(this , 1 , intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
+
     }
 
 
