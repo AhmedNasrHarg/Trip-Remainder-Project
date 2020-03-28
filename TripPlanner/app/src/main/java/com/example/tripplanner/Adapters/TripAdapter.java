@@ -1,20 +1,17 @@
-package com.example.tripplanner.POJOs;
+package com.example.tripplanner.Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
-import com.example.tripplanner.Views.HomeView.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,18 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.Models.HomeModel.HomeContract;
 import com.example.tripplanner.POJOs.Trip;
-import com.example.tripplanner.POJOs.TripAdapter;
+import com.example.tripplanner.Adapters.TripAdapter;
 import com.example.tripplanner.Presenters.HomePresenter.HomePresenter;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.HistoryView.History;
 import com.example.tripplanner.Views.TripDetails.TripDetails;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements HomeContract.IView, TripAdapter.OnTripListener {
 
@@ -90,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         recyclerView=findViewById(R.id.recyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(recyce);
-        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripId,trips,this);
+        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripIdHist,trips,this);
         recyclerView.setAdapter(arrayAdapter);
 
     }

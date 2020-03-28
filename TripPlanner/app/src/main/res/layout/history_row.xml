@@ -11,7 +11,7 @@
     android:paddingBottom="10dp">
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/view2Hist"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginLeft="20dp"
@@ -21,10 +21,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destId" />
+        app:layout_constraintTop_toBottomOf="@+id/destIdHist" />
 
     <TextView
-        android:id="@+id/dateId"
+        android:id="@+id/dateIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,18 +35,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/timeId"
+        android:id="@+id/timeIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:text="12:20"
-        app:layout_constraintStart_toEndOf="@+id/dateId"
+        app:layout_constraintStart_toEndOf="@+id/dateIdHist"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tripId"
+        android:id="@+id/tripIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,21 +56,21 @@
         android:textSize="18sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateId" />
+        app:layout_constraintTop_toBottomOf="@+id/dateIdHist" />
 
     <TextView
-        android:id="@+id/statusId"
+        android:id="@+id/statusIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
         android:layout_marginLeft="112dp"
         android:layout_marginTop="12dp"
         android:text="Upcoming"
-        app:layout_constraintStart_toEndOf="@+id/tripId"
-        app:layout_constraintTop_toBottomOf="@+id/timeId" />
+        app:layout_constraintStart_toEndOf="@+id/tripIdHist"
+        app:layout_constraintTop_toBottomOf="@+id/timeIdHist" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/viewHist"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginLeft="20dp"
@@ -79,10 +79,10 @@
         android:background="#706363"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusId" />
+        app:layout_constraintTop_toBottomOf="@+id/statusIdHist" />
 
     <TextView
-        android:id="@+id/srcId"
+        android:id="@+id/srcIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
@@ -91,10 +91,10 @@
         android:text="Here is the src"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/viewHist" />
 
     <TextView
-        android:id="@+id/destId"
+        android:id="@+id/destIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
@@ -103,34 +103,21 @@
         android:text="Here is dest"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/srcId" />
+        app:layout_constraintTop_toBottomOf="@+id/srcIdHist" />
 
     <Button
-        android:id="@+id/startId"
-        android:layout_width="170dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
-        android:text="Start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <Button
-        android:id="@+id/noteId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/noteIdHist"
+        android:layout_width="199dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_note_black_24dp"
         android:onClick="showNotes"
-        app:layout_constraintStart_toEndOf="@+id/startId"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2Hist" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textView17Hist"
         android:layout_width="36dp"
         android:layout_height="46dp"
         android:layout_marginStart="20dp"
@@ -138,10 +125,10 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/ic_place_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="@+id/viewHist" />
 
     <Button
-        android:id="@+id/menuBtnId"
+        android:id="@+id/menuBtnIdHist"
         android:layout_width="51dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
