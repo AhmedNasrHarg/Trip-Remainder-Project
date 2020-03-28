@@ -3,7 +3,7 @@
     package="com.example.tripplanner">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.TripDetails.TripDetails"></activity>
+
+        <activity android:name=".Views.TripView.Dialog" android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity android:name=".Views.TripDetails.TripDetails" />
         <activity android:name=".Views.Register.Register" />
         <activity android:name=".Views.Login.Login" />
         <activity
@@ -27,9 +29,10 @@
         <activity android:name=".Views.HistoryView.History" />
         <activity
             android:name=".Views.HomeView.MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
+        <service android:name=".Views.TripView.ForegroundService" />
+<receiver android:name=".Views.TripView.ReminderBroadcast"></receiver>
 
-        <receiver android:name=".Views.TripView.AlertReceiver" />
     </application>
 
 </manifest>
