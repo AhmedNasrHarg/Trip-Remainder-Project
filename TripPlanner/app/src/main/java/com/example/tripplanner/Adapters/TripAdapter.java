@@ -1,6 +1,7 @@
 package com.example.tripplanner.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.POJOs.Trip;
@@ -32,15 +34,40 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TripAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TripAdapter.ViewHolder holder, final int position) {
         holder.date.setText(items.get(position).getTripDate());
         holder.time.setText(items.get(position).getTripTime());
         holder.name.setText(items.get(position).getTripName());
         holder.src.setText(items.get(position).getStartPoint());
         holder.dest.setText(items.get(position).getEndPoint());
         holder.type.setText(items.get(position).getStatus());
-    }
 
+        holder.notesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(position);
+                //create().show();
+            }
+        });
+    }
+    public void showDialog(int position){
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("Trip Notes").setIcon(R.drawable.ic_note_black_24dp);
+        ArrayList<String> li=items.get(position).getNotes();
+        if(li.size()==0)
+            li.add("There were no notes!");
+        String[] tripNotes= new String[li.size()];
+        for (int i=0;i<li.size();i++){
+            tripNotes[i]=li.get(i);
+        }
+        builder.setItems(tripNotes, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).create().show();
+    }
     @Override
     public int getItemCount() {
         return items.size();
@@ -52,6 +79,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         public TextView src;
         public TextView dest;
         public TextView type;
+        public Button notesBtn;
+        public Button menuBtn;
         public View layout;
 
         public void showNotes(View view) {
@@ -78,6 +107,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
             src=v.findViewById(R.id.srcId);
             dest=v.findViewById(R.id.destId);
             type=v.findViewById(R.id.statusId);
+            notesBtn=v.findViewById(R.id.noteId);
+            menuBtn=v.findViewById(R.id.menuBtnId);
         }
 
         @Override

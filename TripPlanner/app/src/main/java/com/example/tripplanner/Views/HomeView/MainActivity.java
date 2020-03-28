@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         recyclerView=findViewById(R.id.recyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(recyce);
-        arrayAdapter=new TripAdapter(getApplicationContext(),R.layout.trip_row ,R.id.tripIdHist,trips,this);
+        arrayAdapter=new TripAdapter(this,R.layout.trip_row ,R.id.tripIdHist,trips,this);
         recyclerView.setAdapter(arrayAdapter);
 
     }
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
 
     public void addNewTrip(View view) {
         // startActivityForResult
-        Intent intent=new Intent(getApplicationContext(), TripActivity.class);
+        Intent intent=new Intent(this, TripActivity.class);
         startActivity(intent);
     }
 

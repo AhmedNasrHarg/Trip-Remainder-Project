@@ -37,7 +37,7 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
         recyclerView=findViewById(R.id.historyRecyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(recyce);
-        arrayAdapter=new HistoryAdapter(getApplicationContext(),R.layout.history_row ,R.id.tripIdHist,trips,  this);
+        arrayAdapter=new HistoryAdapter(this,R.layout.history_row ,R.id.tripIdHist,trips,  this);
         recyclerView.setAdapter(arrayAdapter);
     }
 
