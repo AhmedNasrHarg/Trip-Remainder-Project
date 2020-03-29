@@ -29,6 +29,9 @@ public class TripModel implements TripContract.IModel {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Trip curTrip=snapshot.getValue(Trip.class);
+//                    Iterable<DataSnapshot> dateTime = snapshot.getChildren();
+//                    String key = dateTime.iterator().next().getKey();
+//                    Trip curTrip=snapshot.child(key).getValue(Trip.class);
                     if(curTrip.getStatus().equals("Upcoming"))
                         trips.add(curTrip);
 //                    TripModel.this.view.arrayAdapter.notifyDataSetChanged();
@@ -47,7 +50,10 @@ public class TripModel implements TripContract.IModel {
         });
     }
     @Override
-    public void addNewTrip(Trip trip) {
-        myRef.child(myRef.push().getKey()).setValue(trip);
+    public void addNewTrip(Trip trip) {            // [1]
+        String id=myRef.push().getKey();
+        trip.setId(id);
+        myRef.child(id).setValue(trip);
+//          myRef.child(myRef.push().getKey()).child(trip.getTripDate()+trip.getTripTime()).setValue(trip);
     }
 }
