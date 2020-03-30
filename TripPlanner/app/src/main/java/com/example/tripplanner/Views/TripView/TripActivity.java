@@ -224,7 +224,12 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         //reqCode++;
         AlarmManager alarmang = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderBroadcast.class);
-        PendingIntent pi =  PendingIntent.getBroadcast(this , reqCode++ , intent , 0);
+        int requestCode;
+        if(purpose.equals("newTrip"))
+            requestCode=reqCode++;
+        else
+            requestCode=trip.getRequestCode();
+        PendingIntent pi =  PendingIntent.getBroadcast(this , requestCode, intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
     }
 
