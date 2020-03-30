@@ -40,7 +40,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     TextView calDate;
     TextView timeTxt;
     Calendar calendar;
-  //  NotificationHelper notifHelper;
+
+
     TripPresenter tripPresenter;
     Switch type;
     EditText tripName;
@@ -50,8 +51,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     double longtiude;
     double latitude;
 
+
     String purpose="";
     Trip trip;
+    static int reqCode = 0;
 
     Button addBtn;
     @Override
@@ -75,6 +78,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         cal = findViewById(R.id.calendar);
         time.setBackgroundResource(R.drawable.ala);
         cal.setBackgroundResource(R.drawable.calendar7);
+       // reqCode =0;
 
         // to check if am coming from add new trip or edit a trip
         Intent intent =getIntent();
@@ -173,11 +177,11 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void startAlarm(Calendar c) {
+        //reqCode++;
         AlarmManager alarmang = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderBroadcast.class);
-        PendingIntent pi =  PendingIntent.getBroadcast(this , 1 , intent , 0);
+        PendingIntent pi =  PendingIntent.getBroadcast(this , reqCode++ , intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
-
     }
 
     @Override
