@@ -19,6 +19,13 @@ public class Trip implements Serializable {
     private String id;
     private ArrayList<String> notes= new ArrayList<>();
 
+    private int requestCode;
+    private int year;
+    private int month;
+    private int dayOfMonth;
+    private int minute;
+    private int hourOfDay;
+
     public Trip() {
     }
 
@@ -121,5 +128,51 @@ public class Trip implements Serializable {
         this.latitude = latitude;
     }
 
+    public int getRequestCode() {
+        return requestCode;
+    }
 
+    public void setRequestCode(int requestCode) {
+        this.requestCode = requestCode;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    public void setDayOfMonth(int dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public int getHourOfDay() {
+        return hourOfDay;
+    }
+
+    public void setHourOfDay(int hourOfDay) {
+        this.hourOfDay = hourOfDay;
+    }
 }

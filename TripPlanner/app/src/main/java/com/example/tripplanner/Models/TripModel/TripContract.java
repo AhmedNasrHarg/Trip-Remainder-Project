@@ -8,8 +8,10 @@ public class TripContract {
     }
     public interface IModel{
         public void addNewTrip(Trip trip);
+        public void updateTrip(Trip trip);
     }
     public interface IPresenter{
         public void addNewTrip(Trip trip);
+        public void updateTrip(Trip trip);
     }
 }
