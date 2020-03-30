@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
 
     public void addNewTrip(View view) {
         Intent intent=new Intent(this, TripActivity.class);
+        intent.putExtra("purpose","newTrip");
         startActivity(intent);
     }
 

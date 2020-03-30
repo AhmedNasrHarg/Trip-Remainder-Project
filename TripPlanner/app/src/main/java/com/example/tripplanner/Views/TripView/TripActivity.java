@@ -50,6 +50,9 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     double longtiude;
     double latitude;
 
+    String purpose="";
+    Trip trip;
+
     Button addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Add New Trip");
         tripPresenter=new TripPresenter(this);
+
         //ids
         addBtn=findViewById(R.id.addTripBtn);
         type=findViewById(R.id.switch2);
@@ -71,6 +75,27 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         cal = findViewById(R.id.calendar);
         time.setBackgroundResource(R.drawable.ala);
         cal.setBackgroundResource(R.drawable.calendar7);
+
+        // to check if am coming from add new trip or edit a trip
+        Intent intent =getIntent();
+        purpose=intent.getExtras().getString("purpose");
+        if(purpose.equals("editTrip")) {
+            trip = (Trip) intent.getExtras().getSerializable("curTrip");
+            getSupportActionBar().setTitle("Edit Trip");
+            addBtn.setText("Save");
+            type.setChecked(trip.getTripType().equals("round"));
+            tripName.setText(trip.getTripName());
+            startPoint.setText(trip.getStartPoint());
+            endPoint.setText(trip.getEndPoint());
+            calDate.setText(trip.getTripDate());
+            timeTxt.setText(trip.getTripTime());
+        }else{
+
+        }
+
+
+
+
 
 
         type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -101,8 +101,12 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         return true;
                     case R.id.EditTrip:
                         // can edit trip ""
+                        Intent intentToEdit=new Intent(context, TripActivity.class);
+                        intentToEdit.putExtra("purpose","editTrip");
+                        intentToEdit.putExtra("curTrip",items.get(position));
+                        context.startActivity(intentToEdit);
                         return true;
-                    case R.id.DeleteTrip:
+                    case R.id.DeleteTrip:                   //[DONE] [lssssssssssssssssssssaaaaa] delete from calender if confirmed
                         //show dialog to confirm first & delete trip and add it to history as cancelled & notify if needed
                         showDeleteDialog(position);
                         return true;
@@ -142,6 +146,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         curTrip.setStatus("Cancelled");
                         myRef.child(items.get(position).getId()).setValue(curTrip);
                         items.remove(position);
+                                                                                 //[lssssssssssssssssssssaaaaa] delete from calender
                         dialog.dismiss();
                     }
 
