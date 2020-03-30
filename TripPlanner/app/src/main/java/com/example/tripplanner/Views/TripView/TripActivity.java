@@ -92,7 +92,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     startAlarm(calendar);
                     Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
                     ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
-                    curTrip.addNewNote("Java");
+//                    curTrip.addNewNote("Java");
                     tripPresenter.addNewTrip(curTrip);
                 }else{
                     Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();

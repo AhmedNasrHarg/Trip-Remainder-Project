@@ -23,7 +23,7 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
     RecyclerView recyclerView;
     public HistoryAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
-    ArrayList<Trip> trips=new ArrayList<>();
+    public ArrayList<Trip> trips=new ArrayList<>();
     HistoryPresenter historyPresenter;
 
     @Override

@@ -57,6 +57,8 @@ public class NotesActivity extends AppCompatActivity implements NotesContract.IV
         Intent intent=getIntent();
         trip= (Trip) intent.getSerializableExtra("Trip");
         notes=trip.getNotes();
+        if(notes.contains("There are no notes!"))
+            notes.remove("There are no notes!");
         presenter=new NotesPresenter(this);
 
         recyclerView=findViewById(R.id.notesRecyclerView);

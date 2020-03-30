@@ -138,7 +138,9 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code : delete from db & am not sure if I have to delete from array passed to adapter or not.
-                        myRef.child(items.get(position).getId()).removeValue();
+                        Trip curTrip=items.get(position);
+                        curTrip.setStatus("Cancelled");
+                        myRef.child(items.get(position).getId()).setValue(curTrip);
                         items.remove(position);
                         dialog.dismiss();
                     }
