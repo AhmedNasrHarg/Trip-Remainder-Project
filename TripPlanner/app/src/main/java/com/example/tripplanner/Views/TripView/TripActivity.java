@@ -150,13 +150,14 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     curTrip.setDayOfMonth(dayOfMonth);
                     curTrip.setMinute(minute);
                     curTrip.setHourOfDay(hourOfDay);
-                    curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
-                    Log.i("nasor",minute+"");
+                           Log.i("nasor",minute+"");
                     if(purpose.equals("newTrip")){
-                         tripPresenter.addNewTrip(curTrip);
+                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
+                        tripPresenter.addNewTrip(curTrip);
                          // if we will edit, move setRequestCode to here only coz the other case already has a reqCode
                     }else{  //editTrip
                         curTrip.setId(trip.getId());
+                        curTrip.setRequestCode(trip.getRequestCode());
                          tripPresenter.updateTrip(curTrip);         // if we will edit, so move startAlarm() to newTrip only [viiiiiiiiip]
                          // delte from calender or update using request code
                         // [viiiiiiiiiiiiiiiiiiiiiiiip]
