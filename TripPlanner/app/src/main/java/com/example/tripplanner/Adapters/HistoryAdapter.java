@@ -1,6 +1,7 @@
 package com.example.tripplanner.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,17 +9,24 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
+import com.example.tripplanner.Views.HistoryView.History;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder>  {
 
-    private Context context;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("trips");
+
+    private History context;
     HistoryAdapter.OnHistoryListener onHistoryListener;
     private ArrayList<Trip> items=new ArrayList<>();
     @NonNull
@@ -32,14 +40,75 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, final int position) {
         holder.date.setText(items.get(position).getTripDate());
         holder.time.setText(items.get(position).getTripTime());
         holder.name.setText(items.get(position).getTripName());
         holder.src.setText(items.get(position).getStartPoint());
         holder.dest.setText(items.get(position).getEndPoint());
         holder.type.setText(items.get(position).getStatus());
-        // add buttons to holder class by findViewById(), then handle events here;
+
+        holder.notesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNotesDialog(position);
+            }
+        });
+
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteDialog(position);
+            }
+        });
+
+    }
+
+    public void showDeleteDialog(final int position){
+//        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
+        AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
+        myQuittingDialogBox.setTitle("Delete")
+                .setMessage("Are you sure you want to Delete this trip ?")
+                .setIcon(R.drawable.ic_delete_black_24dp)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        Trip curTrip=items.get(position);
+                        curTrip.setStatus("Deleted");
+                        myRef.child(items.get(position).getId()).setValue(curTrip);
+                        items.remove(position);
+//                        context.trips.remove(position);
+                        context.arrayAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+    }
+    public void showNotesDialog(int position){
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("Trip Notes").setIcon(R.drawable.ic_note_black_24dp);
+        ArrayList<String> li=items.get(position).getNotes();
+        if(li.size()==0)
+            li.add("There were no notes!");
+        String[] tripNotes= new String[li.size()];
+        for (int i=0;i<li.size();i++){
+            tripNotes[i]=li.get(i);
+        }
+         builder.setItems(tripNotes, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create().show();
     }
 
     @Override
@@ -53,6 +122,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         public TextView src;
         public TextView dest;
         public TextView type;
+        public Button notesBtn;
+        public Button deleteBtn;
         public View layout;
 
         public void showNotes(View view) {
@@ -79,6 +150,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             src=v.findViewById(R.id.srcIdHist);
             dest=v.findViewById(R.id.destIdHist);
             type=v.findViewById(R.id.statusIdHist);
+            notesBtn=v.findViewById(R.id.noteIdHist);
+            deleteBtn=v.findViewById(R.id.deleteBtnIdHist);
         }
 
         @Override
@@ -91,7 +164,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     public HistoryAdapter(@NonNull Context context, int resource, int textViewResourceId, List items, OnHistoryListener onHistoryListener) {
-        this.context=context;
+        this.context= (History) context;
         this.items= (ArrayList<Trip>) items;
         this.onHistoryListener=onHistoryListener;
     }

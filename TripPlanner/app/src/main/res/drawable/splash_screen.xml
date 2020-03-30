@@ -6,7 +6,8 @@
                 android:centerX="0.5"
                 android:centerY="0.5"
                 android:endColor="#ffffff"
-                android:startColor="#33b5e5"
+                android:centerColor="#ffffff"
+                android:startColor="#ffffff"
                 android:gradientRadius="400dp"
                 android:type="radial"/>
         </shape>
@@ -15,6 +16,6 @@
         android:gravity="center">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/two"/>
+            android:src="@drawable/log2"/>
     </item>
 </layer-list>

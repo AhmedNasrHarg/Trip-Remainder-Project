@@ -16,6 +16,7 @@ public class Trip implements Serializable {
     private String status;      // upcoming, or Cancelled, or Done
     private double longtiude;
     private double latitude;
+    private String id;
     private ArrayList<String> notes= new ArrayList<>();
 
     public Trip() {
@@ -32,6 +33,15 @@ public class Trip implements Serializable {
         this.longtiude=longtiude;
         this.latitude=latitude;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void addNewNote(String note){
         notes.add(note);
     }

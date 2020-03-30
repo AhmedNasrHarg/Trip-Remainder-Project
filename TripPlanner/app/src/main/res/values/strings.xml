@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">GO ON</string>
+    <string name="app_name" translatable="false">Tripsy</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="title_activity_home">Home</string>
@@ -20,6 +20,6 @@
     <string name="btn">Register</string>
     <string name="login">Login</string>
     <string name="google">"Google "</string>
-    <string name="name">GO ON</string>
+    <string name="name">Tripsy</string>
     <string name="con">Con.Password</string>
 </resources>

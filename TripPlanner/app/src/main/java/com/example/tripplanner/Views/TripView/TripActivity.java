@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
@@ -31,7 +33,7 @@ import com.example.tripplanner.R;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class TripActivity extends AppCompatActivity implements TripContract.IView , DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener  {
+public class TripActivity extends AppCompatActivity implements TripContract.IView , DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener {
 
     Button cal;
     Button time;
@@ -89,14 +91,13 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                startAlarm(calendar);
                 if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
                 && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
-
-                Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
-                ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
-                curTrip.addNewNote("Java");
-                tripPresenter.addNewTrip(curTrip);
+                    startAlarm(calendar);
+                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
+                    ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
+//                    curTrip.addNewNote("Java");
+                    tripPresenter.addNewTrip(curTrip);
                 }else{
                     Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
                 }
@@ -157,7 +158,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         PendingIntent pi =  PendingIntent.getBroadcast(this , reqCode++ , intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
     }
-
 
     @Override
     public void addedNewTrip() {

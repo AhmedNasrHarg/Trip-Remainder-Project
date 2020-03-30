@@ -62,11 +62,11 @@
         android:id="@+id/statusIdHist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginLeft="112dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:text="Upcoming"
-        app:layout_constraintStart_toEndOf="@+id/tripIdHist"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeIdHist" />
 
     <View
@@ -107,13 +107,14 @@
 
     <Button
         android:id="@+id/noteIdHist"
-        android:layout_width="199dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="112dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/ic_note_black_24dp"
         android:onClick="showNotes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view2Hist" />
 
     <TextView
@@ -128,12 +129,13 @@
         app:layout_constraintTop_toTopOf="@+id/viewHist" />
 
     <Button
-        android:id="@+id/menuBtnIdHist"
+        android:id="@+id/deleteBtnIdHist"
         android:layout_width="51dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/ic_menu_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_delete_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destIdHist" />
 </androidx.constraintlayout.widget.ConstraintLayout>
