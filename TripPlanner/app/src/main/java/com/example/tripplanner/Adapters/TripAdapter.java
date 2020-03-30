@@ -23,13 +23,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
+import com.example.tripplanner.Views.NotesView.NotesActivity;
 import com.example.tripplanner.Views.TripView.TripActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("trips");
 
     private Context context;
     OnTripListener onTripListener;
@@ -87,13 +94,16 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 //                Toast.makeText(context, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
                 switch (item.getItemId()) {
                     case R.id.TripNotes:
-                        // can add new note
+                        //navigate to notes activity        [DONE]
+                        Intent intent=new Intent(context, NotesActivity.class);
+                        intent.putExtra("Trip",items.get(position));
+                        context.startActivity(intent);
                         return true;
                     case R.id.EditTrip:
-                        // can edit trip
+                        // can edit trip ""
                         return true;
                     case R.id.DeleteTrip:
-                        //show dialog to confirm first & delete trip and add it to history as cancelled
+                        //show dialog to confirm first & delete trip and add it to history as cancelled & notify if needed
                         showDeleteDialog(position);
                         return true;
                     case R.id.cancelMenu:
@@ -110,15 +120,14 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         menuHelper.show();
     }
 
-    public void openMap(int position)
-    {
+    public void openMap(int position){
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                                                 //replace address with the endPoint address
                 Uri.parse("google.navigation:q="+items.get(position).getEndPoint()));
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
     }
-    public void showDeleteDialog(int position){
+    public void showDeleteDialog(final int position){
 //        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
         AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
         myQuittingDialogBox.setTitle("Delete")
@@ -128,8 +137,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //your deleting code
-
+                        //your deleting code : delete from db & am not sure if I have to delete from array passed to adapter or not.
+                        Trip curTrip=items.get(position);
+                        curTrip.setStatus("Cancelled");
+                        myRef.child(items.get(position).getId()).setValue(curTrip);
+                        items.remove(position);
                         dialog.dismiss();
                     }
 
@@ -146,7 +158,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         builder.setTitle("Trip Notes").setIcon(R.drawable.ic_note_black_24dp);
         ArrayList<String> li=items.get(position).getNotes();
         if(li.size()==0)
-            li.add("There were no notes!");
+            li.add("There are no notes!");
         String[] tripNotes= new String[li.size()];
         for (int i=0;i<li.size();i++){
             tripNotes[i]=li.get(i);

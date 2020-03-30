@@ -3,10 +3,8 @@
     package="com.example.tripplanner">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -15,30 +13,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Views.TripView.Dialog" android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity android:name=".Views.NotesView.NotesActivity"></activity>
+        <activity
+            android:name=".Views.TripView.Dialog"
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".Views.TripDetails.TripDetails" />
         <activity android:name=".Views.Register.Register" />
         <activity android:name=".Views.Login.Login" />
         <activity
             android:name=".Views.SplashView.SplashScreen"
-            android:theme="@style/AppTheme.SplashTheme">
-
-        </activity>
+            android:theme="@style/AppTheme.SplashTheme"></activity>
         <activity android:name=".Views.TripView.TripActivity" />
         <activity android:name=".Views.HistoryView.History" />
         <activity
             android:name=".Views.HomeView.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".Views.TripView.ForegroundService" />
-<receiver android:name=".Views.TripView.ReminderBroadcast"></receiver>
 
+        <service android:name=".Views.TripView.ForegroundService" />
+
+        <receiver android:name=".Views.TripView.ReminderBroadcast" />
     </application>
 
 </manifest>

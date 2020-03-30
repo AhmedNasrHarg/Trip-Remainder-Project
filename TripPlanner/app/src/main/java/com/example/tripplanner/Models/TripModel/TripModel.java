@@ -48,6 +48,8 @@ public class TripModel implements TripContract.IModel {
     }
     @Override
     public void addNewTrip(Trip trip) {
-        myRef.child(myRef.push().getKey()).setValue(trip);
+        String id=myRef.push().getKey();
+        trip.setId(id);
+        myRef.child(id).setValue(trip);
     }
 }

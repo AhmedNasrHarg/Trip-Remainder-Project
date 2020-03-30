@@ -14,13 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
+import com.example.tripplanner.Views.HistoryView.History;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder>  {
 
-    private Context context;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("trips");
+
+    private History context;
     HistoryAdapter.OnHistoryListener onHistoryListener;
     private ArrayList<Trip> items=new ArrayList<>();
     @NonNull
@@ -45,7 +51,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.notesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showDialog(position);
+                showNotesDialog(position);
             }
         });
 
@@ -58,7 +64,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     }
 
-    public void showDeleteDialog(int position){
+    public void showDeleteDialog(final int position){
 //        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
         AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
         myQuittingDialogBox.setTitle("Delete")
@@ -69,7 +75,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code
-
+                        Trip curTrip=items.get(position);
+                        curTrip.setStatus("Deleted");
+                        myRef.child(items.get(position).getId()).setValue(curTrip);
+                        items.remove(position);
+//                        context.trips.remove(position);
+                        context.arrayAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
 
@@ -81,7 +92,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 })
                 .create().show();
     }
-    public void showDialog(int position){
+    public void showNotesDialog(int position){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setTitle("Trip Notes").setIcon(R.drawable.ic_note_black_24dp);
         ArrayList<String> li=items.get(position).getNotes();
@@ -153,7 +164,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     public HistoryAdapter(@NonNull Context context, int resource, int textViewResourceId, List items, OnHistoryListener onHistoryListener) {
-        this.context=context;
+        this.context= (History) context;
         this.items= (ArrayList<Trip>) items;
         this.onHistoryListener=onHistoryListener;
     }

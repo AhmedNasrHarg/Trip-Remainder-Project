@@ -33,7 +33,11 @@ public class HistoryModel implements HistoryContract.IModel {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Trip curTrip=snapshot.getValue(Trip.class);
-                    if(!curTrip.getStatus().equals("Upcoming")){
+
+//                    Iterable<DataSnapshot> dateTime = snapshot.getChildren();
+//                    String key = dateTime.iterator().next().getKey();
+//                    Trip curTrip=snapshot.child(key).getValue(Trip.class);
+                    if((!curTrip.getStatus().equals("Upcoming"))&&(!curTrip.getStatus().equals("Deleted"))){
                         trips.add(curTrip);
                         HistoryModel.this.view.arrayAdapter.notifyDataSetChanged();
                     }
