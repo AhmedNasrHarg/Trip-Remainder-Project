@@ -32,9 +32,6 @@ public class HomeModel implements HomeContract.IModel {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Trip curTrip=snapshot.getValue(Trip.class);
-//                    Iterable<DataSnapshot> dateTime = snapshot.getChildren();
-//                    String key = dateTime.iterator().next().getKey();
-//                    Trip curTrip=snapshot.child(key).getValue(Trip.class);
                     if(curTrip.getStatus().equals("Upcoming"))
                         trips.add(curTrip);
                     HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
@@ -58,9 +55,6 @@ public class HomeModel implements HomeContract.IModel {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Trip curTrip=snapshot.getValue(Trip.class);
-//                    Iterable<DataSnapshot> dateTime = snapshot.getChildren();
-//                    String key = dateTime.iterator().next().getKey();
-//                    Trip curTrip=snapshot.child(key).getValue(Trip.class);
                     if(curTrip.getStatus().equals("Upcoming"))
                         trips.add(curTrip);
                     HomeModel.this.view.arrayAdapter.notifyDataSetChanged();

@@ -25,12 +25,18 @@ import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.NotesView.NotesActivity;
 import com.example.tripplanner.Views.TripView.TripActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("trips");
 
     private Context context;
     OnTripListener onTripListener;
@@ -88,7 +94,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 //                Toast.makeText(context, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
                 switch (item.getItemId()) {
                     case R.id.TripNotes:
-                        //navigate to notes activity
+                        //navigate to notes activity        [DONE]
                         Intent intent=new Intent(context, NotesActivity.class);
                         intent.putExtra("Trip",items.get(position));
                         context.startActivity(intent);
@@ -121,7 +127,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
     }
-    public void showDeleteDialog(int position){
+    public void showDeleteDialog(final int position){
 //        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
         AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
         myQuittingDialogBox.setTitle("Delete")
@@ -132,7 +138,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code : delete from db & am not sure if I have to delete from array passed to adapter or not.
-
+                        myRef.child(items.get(position).getId()).removeValue();
+                        items.remove(position);
                         dialog.dismiss();
                     }
 
