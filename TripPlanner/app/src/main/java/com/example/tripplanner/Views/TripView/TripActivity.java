@@ -56,12 +56,11 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     TripPresenter tripPresenter;
     Switch type;
+
     EditText tripName;
-    EditText startPoint;
-    EditText endPoint;
+    TextView startPoint;
+    TextView endPoint;
     String toggleCheck="oneWay";
-//    double longtiude;
-//    double latitude;
      double endLatitude;
     double endLongtude;
     double startLatitude;
@@ -148,54 +147,54 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                 && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
                     startAlarm(calendar);
 
-//                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
-//                    ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
-//                    curTrip.addNewNote("Java");
-//                    tripPresenter.addNewTrip(curTrip);
+                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
+                    ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",endLongtude,endLatitude);
+                    curTrip.addNewNote("Java");
+                    tripPresenter.addNewTrip(curTrip);
 
 //                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
 //                            ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
 //                    curTrip.addNewNote("Java");
 
-//                    curTrip.setYear(year);
-//                    curTrip.setMonth(month);
-//                    curTrip.setDayOfMonth(dayOfMonth);
-//                    curTrip.setMinute(minute);
-//                    curTrip.setHourOfDay(hourOfDay);
-//                           Log.i("nasor",minute+"");
-//                    if(purpose.equals("newTrip")){
-//                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
-//                        tripPresenter.addNewTrip(curTrip);
-//                         // if we will edit, move setRequestCode to here only coz the other case already has a reqCode
-//                    }else{  //editTrip
-//                        curTrip.setId(trip.getId());
-//                        curTrip.setRequestCode(trip.getRequestCode());
-//                         tripPresenter.updateTrip(curTrip);         // if we will edit, so move startAlarm() to newTrip only [viiiiiiiiip]
-                         // delte from calender or update using request code
-                        // [viiiiiiiiiiiiiiiiiiiiiiiip]
+                    curTrip.setYear(year);
+                    curTrip.setMonth(month);
+                    curTrip.setDayOfMonth(dayOfMonth);
+                    curTrip.setMinute(minute);
+                    curTrip.setHourOfDay(hourOfDay);
+                           Log.i("nasor",minute+"");
+                    if(purpose.equals("newTrip")){
+                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
+                        tripPresenter.addNewTrip(curTrip);
+                         // if we will edit, move setRequestCode to here only coz the other case already has a reqCode
+                    }else{  //editTrip
+                        curTrip.setId(trip.getId());
+                        curTrip.setRequestCode(trip.getRequestCode());
+                         tripPresenter.updateTrip(curTrip);         // if we will edit, so move startAlarm() to newTrip only [viiiiiiiiip]
+//                          delte from calender or update using request code
+                     //    [viiiiiiiiiiiiiiiiiiiiiiiip]
 
-//                    curTrip.setYear(year);
-//                    curTrip.setMonth(month);
-//                    curTrip.setDayOfMonth(dayOfMonth);
-//                    curTrip.setMinute(minute);
-//                    curTrip.setHourOfDay(hourOfDay);
-//
-//                    if(purpose.equals("newTrip")){
-//                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
-//                        tripPresenter.addNewTrip(curTrip);
-//                    }else{  //editTrip
-//                        curTrip.setId(trip.getId());
-//                        curTrip.setRequestCode(trip.getRequestCode());
-//                         tripPresenter.updateTrip(curTrip);
-//
-//                        // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
-////                        finish();
-//                    }
+                    curTrip.setYear(year);
+                    curTrip.setMonth(month);
+                    curTrip.setDayOfMonth(dayOfMonth);
+                    curTrip.setMinute(minute);
+                    curTrip.setHourOfDay(hourOfDay);
+
+                    if(purpose.equals("newTrip")){
+                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
+                        tripPresenter.addNewTrip(curTrip);
+                    }else{  //editTrip
+                        curTrip.setId(trip.getId());
+                        curTrip.setRequestCode(trip.getRequestCode());
+                         tripPresenter.updateTrip(curTrip);
+
+                        // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
+//                        finish();
+                    }
 //                }else{
 //                    Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
 //                }
           }
-        });
+        };
 
        // notifHelper = new NotificationHelper(this );
         calendar = Calendar.getInstance();
@@ -238,6 +237,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                 startLatitude = place.getLatLng().latitude;
                 startLongtude = place.getLatLng().longitude;
                 startPlaceName = place.getName().toString();
+                startPoint.setText(startPlaceName);
             }
 
             @Override
@@ -253,6 +253,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                 endLatitude = place.getLatLng().latitude;
                 endLongtude = place.getLatLng().longitude;
                 endPlaceName = place.getName().toString();
+                endPoint.setText(endPlaceName);
                 thePlaceId = place.getId();
             }
 
@@ -309,3 +310,4 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         finish();
     }
 }
+
