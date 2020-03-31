@@ -138,85 +138,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     toggleCheck="oneWay";
             }
         });
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-
-                if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
-                && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
-                    startAlarm(calendar);
-
-                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
-                    ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",endLongtude,endLatitude);
-                    curTrip.addNewNote("Java");
-                    tripPresenter.addNewTrip(curTrip);
-
-//                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
-//                            ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
-//                    curTrip.addNewNote("Java");
-
-                    curTrip.setYear(year);
-                    curTrip.setMonth(month);
-                    curTrip.setDayOfMonth(dayOfMonth);
-                    curTrip.setMinute(minute);
-                    curTrip.setHourOfDay(hourOfDay);
-                           Log.i("nasor",minute+"");
-                    if(purpose.equals("newTrip")){
-                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
-                        tripPresenter.addNewTrip(curTrip);
-                         // if we will edit, move setRequestCode to here only coz the other case already has a reqCode
-                    }else{  //editTrip
-                        curTrip.setId(trip.getId());
-                        curTrip.setRequestCode(trip.getRequestCode());
-                         tripPresenter.updateTrip(curTrip);         // if we will edit, so move startAlarm() to newTrip only [viiiiiiiiip]
-//                          delte from calender or update using request code
-                     //    [viiiiiiiiiiiiiiiiiiiiiiiip]
-
-                    curTrip.setYear(year);
-                    curTrip.setMonth(month);
-                    curTrip.setDayOfMonth(dayOfMonth);
-                    curTrip.setMinute(minute);
-                    curTrip.setHourOfDay(hourOfDay);
-
-                    if(purpose.equals("newTrip")){
-                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
-                        tripPresenter.addNewTrip(curTrip);
-                    }else{  //editTrip
-                        curTrip.setId(trip.getId());
-                        curTrip.setRequestCode(trip.getRequestCode());
-                         tripPresenter.updateTrip(curTrip);
-
-                        // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
-//                        finish();
-                    }
-//                }else{
-//                    Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
-//                }
-          }
-        };
-
-       // notifHelper = new NotificationHelper(this );
-        calendar = Calendar.getInstance();
-
-        cal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                DialogFragment datePicker = new com.example.tripplanner.Views.TripView.DatePickerFrag();
-                datePicker.show(getSupportFragmentManager() , "date picker");
-            }
-        });
-
-
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFrag();
-                timePicker.show(getSupportFragmentManager() , "Time picker");  //calls notifiction function
-            }
-        });
 
         //Auto Complete fragments
         if (!Places.isInitialized()) {
@@ -263,6 +184,92 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             }
         });
 
+
+
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+
+                if (tripName.getText().toString().length() > 0 && startPoint.getText().toString().length() > 0 && endPoint.getText().toString().length() > 0
+                        && calDate.getText().toString().length() > 0 && timeTxt.getText().toString().length() > 0) {
+                    startAlarm(calendar);
+
+                    Trip curTrip = new Trip(tripName.getText().toString(), startPoint.getText().toString(), endPoint.getText().toString()
+                            , calDate.getText().toString(), timeTxt.getText().toString(), toggleCheck, "Upcoming", endLongtude, endLatitude);
+                    curTrip.addNewNote("Java");
+                    tripPresenter.addNewTrip(curTrip);
+
+//                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
+//                            ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
+                    curTrip.addNewNote("Java");
+
+                    curTrip.setYear(year);
+                    curTrip.setMonth(month);
+                    curTrip.setDayOfMonth(dayOfMonth);
+                    curTrip.setMinute(minute);
+                    curTrip.setHourOfDay(hourOfDay);
+                    Log.i("nasor", minute + "");
+                    if (purpose.equals("newTrip")) {
+                        curTrip.setRequestCode(reqCode - 1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
+                        tripPresenter.addNewTrip(curTrip);
+                        // if we will edit, move setRequestCode to here only coz the other case already has a reqCode
+                    } else {  //editTrip
+                        curTrip.setId(trip.getId());
+                        curTrip.setRequestCode(trip.getRequestCode());
+                        tripPresenter.updateTrip(curTrip);         // if we will edit, so move startAlarm() to newTrip only [viiiiiiiiip]
+//                          delte from calender or update using request code
+                        //    [viiiiiiiiiiiiiiiiiiiiiiiip]
+
+                        curTrip.setYear(year);
+                        curTrip.setMonth(month);
+                        curTrip.setDayOfMonth(dayOfMonth);
+                        curTrip.setMinute(minute);
+                        curTrip.setHourOfDay(hourOfDay);
+
+                        if (purpose.equals("newTrip")) {
+                            curTrip.setRequestCode(reqCode - 1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
+                            tripPresenter.addNewTrip(curTrip);
+                        } else {  //editTrip
+                            curTrip.setId(trip.getId());
+                            curTrip.setRequestCode(trip.getRequestCode());
+                            tripPresenter.updateTrip(curTrip);
+
+                            // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
+                       finish();
+                        }
+//                }else{
+//                    Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
+//                }
+                    }
+                };
+
+
+                // notifHelper = new NotificationHelper(this );
+                calendar = Calendar.getInstance();
+
+                cal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        DialogFragment datePicker = new com.example.tripplanner.Views.TripView.DatePickerFrag();
+                        datePicker.show(getSupportFragmentManager(), "date picker");
+                    }
+                });
+
+
+                time.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogFragment timePicker = new TimePickerFrag();
+                        timePicker.show(getSupportFragmentManager(), "Time picker");  //calls notifiction function
+                    }
+                });
+
+                          }
+        });
     }
 
     @Override
@@ -310,4 +317,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         finish();
     }
 }
+
+
+
 
