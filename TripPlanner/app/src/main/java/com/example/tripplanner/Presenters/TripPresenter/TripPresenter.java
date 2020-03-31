@@ -23,4 +23,7 @@ public class TripPresenter implements TripContract.IPresenter {
     public void updateTrip(Trip trip) {
         model.updateTrip(trip);
     }
+    public int getRequestCode(){
+        return model.getRequestCode();
+    }
 }
