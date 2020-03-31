@@ -42,6 +42,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     Button cal;
     Button time;
+    Button addBtn;
     TextView calDate;
     TextView timeTxt;
     Calendar calendar;
@@ -55,6 +56,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     Switch type;
     AutocompleteSupportFragment autocompleteFragment;
     AutocompleteSupportFragment autocompleteFragment2;
+    TextView tripType;
     EditText tripName;
     TextView startPoint;
     TextView endPoint;
@@ -70,7 +72,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     Trip trip;
     static int reqCode = 0;
 
-    Button addBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,13 +88,16 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         type=findViewById(R.id.switch1);
         tripName=findViewById(R.id.tripName);
         startPoint=findViewById(R.id.startPoint);   startPoint.setText("Baltim");   //for testing only
-        endPoint=findViewById(R.id.endPoint);       endPoint.setText("Alexandria"); // for testing only
+        endPoint=findViewById(R.id.endPoint);       endPoint.setText("Alexandria"); // for testing onl
+        startPoint=findViewById(R.id.startPoint);
+        endPoint=findViewById(R.id.endPoint);
         calDate = findViewById(R.id.calDate);
         time = findViewById(R.id.time);
         timeTxt = findViewById(R.id.timeText);
         cal = findViewById(R.id.calendar);
         time.setBackgroundResource(R.drawable.ala);
         cal.setBackgroundResource(R.drawable.calendar7);
+        tripType.findViewById(R.id.tripType);
        // reqCode =0;
 
         // to check if am coming from add new trip or edit a trip
@@ -106,10 +111,15 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             addBtn.setText("Save");
             type.setChecked(trip.getTripType().equals("round"));
             tripName.setText(trip.getTripName());
+
 //            startPoint.setText(trip.getStartPoint());   //[here]                            [heeeeeeeeereeeeeeeee]
 //
 //            endPoint.setText(trip.getEndPoint());       //[here]
             //set in start and end
+
+            //startPoint.setText(trip.getStartPoint());
+          //  endPoint.setText(trip.getEndPoint());
+
             calDate.setText(trip.getTripDate());
             timeTxt.setText(trip.getTripTime());
 
