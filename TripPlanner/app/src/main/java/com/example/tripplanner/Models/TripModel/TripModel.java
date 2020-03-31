@@ -52,4 +52,9 @@ public class TripModel implements TripContract.IModel {
         trip.setId(id);
         myRef.child(id).setValue(trip);
     }
+
+    @Override
+    public void updateTrip(Trip trip) {
+        myRef.child(trip.getId()).setValue(trip);
+    }
 }

@@ -18,4 +18,9 @@ public class TripPresenter implements TripContract.IPresenter {
         model.addNewTrip(trip);
         view.addedNewTrip();
     }
+
+    @Override
+    public void updateTrip(Trip trip) {
+        model.updateTrip(trip);
+    }
 }
