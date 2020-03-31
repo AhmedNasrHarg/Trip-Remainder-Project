@@ -1,6 +1,8 @@
 package com.example.tripplanner.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,11 +26,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.NotesView.NotesActivity;
+import com.example.tripplanner.Views.TripView.ReminderBroadcast;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -100,7 +104,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         context.startActivity(intent);
                         return true;
                     case R.id.EditTrip:
-                        // can edit trip ""
+                        // can edit trip ""                 [DONE]
                         Intent intentToEdit=new Intent(context, TripActivity.class);
                         intentToEdit.putExtra("purpose","editTrip");
                         intentToEdit.putExtra("curTrip",items.get(position));
@@ -131,6 +135,13 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
     }
+    public void cancelAlarm(int position){
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent = new Intent(context, ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context, items.get(position).getRequestCode(), myIntent, 0);
+        alarmManager.cancel(pendingIntent);
+    }
     public void showDeleteDialog(final int position){
 //        final ArrayList<Boolean> deleteFlag=new ArrayList<>();
         AlertDialog.Builder myQuittingDialogBox = new AlertDialog.Builder(context);
@@ -145,8 +156,9 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         Trip curTrip=items.get(position);
                         curTrip.setStatus("Cancelled");
                         myRef.child(items.get(position).getId()).setValue(curTrip);
+                        //[lssssssssssssssssssssaaaaa] delete from calender
+                        cancelAlarm(position);
                         items.remove(position);
-                                                                                 //[lssssssssssssssssssssaaaaa] delete from calender
                         dialog.dismiss();
                     }
 

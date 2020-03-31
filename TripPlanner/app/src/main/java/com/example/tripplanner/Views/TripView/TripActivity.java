@@ -114,7 +114,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
              dayOfMonth=trip.getDayOfMonth();
              minute=trip.getMinute();
              hourOfDay=trip.getHourOfDay();
-             Log.i("nasor",minute+"");
         }else{
 
         }
@@ -150,17 +149,14 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     curTrip.setDayOfMonth(dayOfMonth);
                     curTrip.setMinute(minute);
                     curTrip.setHourOfDay(hourOfDay);
-                           Log.i("nasor",minute+"");
+
                     if(purpose.equals("newTrip")){
                         curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
                         tripPresenter.addNewTrip(curTrip);
-                         // if we will edit, move setRequestCode to here only coz the other case already has a reqCode
                     }else{  //editTrip
                         curTrip.setId(trip.getId());
                         curTrip.setRequestCode(trip.getRequestCode());
-                         tripPresenter.updateTrip(curTrip);         // if we will edit, so move startAlarm() to newTrip only [viiiiiiiiip]
-                         // delte from calender or update using request code
-                        // [viiiiiiiiiiiiiiiiiiiiiiiip]
+                         tripPresenter.updateTrip(curTrip);
                         // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
                         finish();
                     }
@@ -212,7 +208,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         TripActivity.this.hourOfDay=hourOfDay;
         TripActivity.this.minute=minute;
-        Toast.makeText(this,this.minute+"",Toast.LENGTH_SHORT).show();
         calendar.set(Calendar.MINUTE , minute);
         calendar.set(Calendar.HOUR_OF_DAY , hourOfDay);
         calendar.set(Calendar.SECOND , 0);
@@ -232,6 +227,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             requestCode=trip.getRequestCode();
         PendingIntent pi =  PendingIntent.getBroadcast(this , requestCode, intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
+
     }
 
     @Override
