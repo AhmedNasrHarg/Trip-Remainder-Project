@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -32,9 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
 
@@ -60,8 +57,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         holder.date.setText(items.get(position).getTripDate());
         holder.time.setText(items.get(position).getTripTime());
         holder.name.setText(items.get(position).getTripName());
-        holder.src.setText(items.get(position).getStartPoint());
-        holder.dest.setText(items.get(position).getEndPoint());
+        holder.src.setText(items.get(position).getStartPlaceName());
+        holder.dest.setText(items.get(position).getEndPlaceName());
         holder.type.setText(items.get(position).getStatus());
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +131,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
     public void openMap(int position){
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                                                 //replace address with the endPoint address
-                Uri.parse("google.navigation:q="+items.get(position).getEndPoint()));
+                Uri.parse("google.navigation:q="+items.get(position).getEndPlaceName()));
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
     }

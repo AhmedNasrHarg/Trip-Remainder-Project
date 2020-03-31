@@ -1,10 +1,10 @@
 package com.example.tripplanner.Views.TripDetails;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.R;
@@ -30,8 +30,8 @@ public class TripDetails extends AppCompatActivity {
 
         status.setText(curTrip.getStatus());
         name.setText(curTrip.getTripName());
-        start.setText(curTrip.getStartPoint());
-        end.setText(curTrip.getEndPoint());
+        start.setText(curTrip.getStartPlaceName());
+        end.setText(curTrip.getEndPlaceName());
         date.setText(curTrip.getTripDate());
         time.setText(curTrip.getTripTime());
         type.setText(curTrip.getTripType());

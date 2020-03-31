@@ -1,21 +1,21 @@
 package com.example.tripplanner.POJOs;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Trip implements Serializable {
     private String tripName;
-    private String startPoint;
-    private String endPoint;
     private String tripDate;
     private String tripTime;
     private String tripType;    //round or oneWay
     private String status;      // upcoming, or Cancelled, or Done
-    private double longtiude;
-    private double latitude;
+    double endLatitude;        //new
+    double endLongtude;         //new
+    double startLatitude;       //new
+    double startLongtude;       //new
+    String thePlaceId;          //new
+    String startPlaceName;     //new
+    String endPlaceName;       //new
     private String id;
     private ArrayList<String> notes= new ArrayList<>();
 
@@ -29,16 +29,12 @@ public class Trip implements Serializable {
     public Trip() {
     }
 
-    public Trip(String tripName, String startPoint, String endPoint, String tripDate, String tripTime, String tripType, String status,double longtiude,double latitude) {
+    public Trip(String tripName, String tripDate, String tripTime, String tripType, String status) {
         this.tripName = tripName;
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
         this.tripDate = tripDate;
         this.tripTime = tripTime;
         this.tripType = tripType;
         this.status=status;
-        this.longtiude=longtiude;
-        this.latitude=latitude;
     }
 
     public String getId() {
@@ -62,22 +58,6 @@ public class Trip implements Serializable {
 
     public void setTripName(String tripName) {
         this.tripName = tripName;
-    }
-
-    public String getStartPoint() {
-        return startPoint;
-    }
-
-    public void setStartPoint(String startPoint) {
-        this.startPoint = startPoint;
-    }
-
-    public String getEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(String endPoint) {
-        this.endPoint = endPoint;
     }
 
     public String getTripDate() {
@@ -110,22 +90,6 @@ public class Trip implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public double getLongtiude() {
-        return longtiude;
-    }
-
-    public void setLongtiude(double longtiude) {
-        this.longtiude = longtiude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
     }
 
     public int getRequestCode() {
@@ -174,5 +138,61 @@ public class Trip implements Serializable {
 
     public void setHourOfDay(int hourOfDay) {
         this.hourOfDay = hourOfDay;
+    }
+
+    public double getEndLatitude() {
+        return endLatitude;
+    }
+
+    public void setEndLatitude(double endLatitude) {
+        this.endLatitude = endLatitude;
+    }
+
+    public double getEndLongtude() {
+        return endLongtude;
+    }
+
+    public void setEndLongtude(double endLongtude) {
+        this.endLongtude = endLongtude;
+    }
+
+    public double getStartLatitude() {
+        return startLatitude;
+    }
+
+    public void setStartLatitude(double startLatitude) {
+        this.startLatitude = startLatitude;
+    }
+
+    public double getStartLongtude() {
+        return startLongtude;
+    }
+
+    public void setStartLongtude(double startLongtude) {
+        this.startLongtude = startLongtude;
+    }
+
+    public String getThePlaceId() {
+        return thePlaceId;
+    }
+
+    public void setThePlaceId(String thePlaceId) {
+        this.thePlaceId = thePlaceId;
+    }
+
+    public String getStartPlaceName() {
+        return startPlaceName;
+    }
+
+    public void setStartPlaceName(String startPlaceName) {
+        this.startPlaceName = startPlaceName;
+    }
+
+    public String getEndPlaceName() {
+        return endPlaceName;
+    }
+
+    public void setEndPlaceName(String endPlaceName) {
+        this.endPlaceName = endPlaceName;
     }
 }

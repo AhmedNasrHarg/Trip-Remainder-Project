@@ -44,8 +44,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.date.setText(items.get(position).getTripDate());
         holder.time.setText(items.get(position).getTripTime());
         holder.name.setText(items.get(position).getTripName());
-        holder.src.setText(items.get(position).getStartPoint());
-        holder.dest.setText(items.get(position).getEndPoint());
+        holder.src.setText(items.get(position).getStartPlaceName());
+        holder.dest.setText(items.get(position).getEndPlaceName());
         holder.type.setText(items.get(position).getStatus());
 
         holder.notesBtn.setOnClickListener(new View.OnClickListener() {
