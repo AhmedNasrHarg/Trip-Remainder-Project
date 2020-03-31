@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
@@ -29,8 +27,14 @@ import com.example.tripplanner.Models.TripModel.TripContract;
 import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.Presenters.TripPresenter.TripPresenter;
 import com.example.tripplanner.R;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class TripActivity extends AppCompatActivity implements TripContract.IView , DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener {
@@ -48,10 +52,15 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     EditText startPoint;
     EditText endPoint;
     String toggleCheck="oneWay";
-    double longtiude;
-    double latitude;
-
-
+//    double longtiude;
+//    double latitude;
+     double endLatitude;
+    double endLongtude;
+    double startLatitude;
+    double startLongtude;
+    String thePlaceId;
+     String startPlaceName;
+     String endPlaceName;
     String purpose="";
     Trip trip;
     static int reqCode = 0;
@@ -68,10 +77,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
         //ids
         addBtn=findViewById(R.id.addTripBtn);
-        type=findViewById(R.id.switch2);
+        type=findViewById(R.id.switch1);
         tripName=findViewById(R.id.tripName);
-        startPoint=findViewById(R.id.startPoint);
-        endPoint=findViewById(R.id.endPoint);
+//        startPoint=findViewById(R.id.startPoint);
+//        endPoint=findViewById(R.id.endPoint);
         calDate = findViewById(R.id.calDate);
         time = findViewById(R.id.time);
         timeTxt = findViewById(R.id.timeText);
@@ -97,12 +106,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
         }
 
-
-
-
-
-
-        type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
@@ -119,10 +123,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                 if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
                 && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
                     startAlarm(calendar);
-                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
-                    ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
+//                    Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
+//                    ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
 //                    curTrip.addNewNote("Java");
-                    tripPresenter.addNewTrip(curTrip);
+//                    tripPresenter.addNewTrip(curTrip);
                 }else{
                     Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
                 }
@@ -148,6 +152,49 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             public void onClick(View v) {
                 DialogFragment timePicker = new TimePickerFrag();
                 timePicker.show(getSupportFragmentManager() , "Time picker");  //calls notifiction function
+            }
+        });
+
+        //Auto Complete fragments
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyAlhcnF8gOLFVzwWJD2Gk0wR0EFVmvMf88");
+        }
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        AutocompleteSupportFragment autocompleteFragment2 = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                startLatitude = place.getLatLng().latitude;
+                startLongtude = place.getLatLng().longitude;
+                startPlaceName = place.getName().toString();
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+            }
+        });
+
+        autocompleteFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                endLatitude = place.getLatLng().latitude;
+                endLongtude = place.getLatLng().longitude;
+                endPlaceName = place.getName().toString();
+                thePlaceId = place.getId();
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
             }
         });
 
