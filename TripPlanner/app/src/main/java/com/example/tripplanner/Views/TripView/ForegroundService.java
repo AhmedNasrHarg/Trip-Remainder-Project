@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -25,16 +26,16 @@ public class ForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //    media.start();
-
+        String reqCode=intent.getStringExtra("reqCode");
         Intent notifiIntent = new Intent(this, Dialog.class);
-        PendingIntent pending =  PendingIntent.getActivity(this, 1, notifiIntent, 0);
+        PendingIntent pending =  PendingIntent.getActivity(this, Integer.parseInt(reqCode), notifiIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_ID)
                 .setContentTitle("Notification")
                 .setContentText("Take care you'll miss your trip")
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentIntent(pending)
                 .build();
-        startForeground(1, notification);;
+        startForeground(1, notification);
 
         return START_NOT_STICKY;
     }

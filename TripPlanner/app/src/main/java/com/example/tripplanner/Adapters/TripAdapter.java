@@ -79,7 +79,10 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
         holder.startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMap(position);
+                openMap(position);                      // [Delete from Calender and move to History as Done]
+                String curId=items.get(position).getId();
+                cancelAlarm(position);
+                myRef.child(curId).child("status").setValue("Done");
             }
         });
     }
@@ -110,7 +113,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         intentToEdit.putExtra("curTrip",items.get(position));
                         context.startActivity(intentToEdit);
                         return true;
-                    case R.id.DeleteTrip:                   //[DONE] [lssssssssssssssssssssaaaaa] delete from calender if confirmed
+                    case R.id.DeleteTrip:                   //[DONE] delete from calender if confirmed
                         //show dialog to confirm first & delete trip and add it to history as cancelled & notify if needed
                         showDeleteDialog(position);
                         return true;

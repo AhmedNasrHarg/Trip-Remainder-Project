@@ -72,6 +72,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         getSupportActionBar().setTitle("Add New Trip");
         tripPresenter=new TripPresenter(this);
 
+
         //ids
         addBtn=findViewById(R.id.addTripBtn);
         type=findViewById(R.id.switch2);
@@ -109,6 +110,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             calendar.set(Calendar.HOUR_OF_DAY , trip.getHourOfDay());
             calendar.set(Calendar.SECOND , 0);
 
+            reqCode=trip.getRequestCode();
              year=trip.getYear();
              month=trip.getMonth();
              dayOfMonth=trip.getDayOfMonth();
@@ -140,7 +142,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
                 if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
                 && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
-                    startAlarm(calendar);
+
                     Trip curTrip=new Trip(tripName.getText().toString(),startPoint.getText().toString(),endPoint.getText().toString()
                             ,calDate.getText().toString(),timeTxt.getText().toString(),toggleCheck,"Upcoming",longtiude,latitude);
 //                    curTrip.addNewNote("Java");
@@ -151,7 +153,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     curTrip.setHourOfDay(hourOfDay);
 
                     if(purpose.equals("newTrip")){
-                        curTrip.setRequestCode(reqCode-1);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
+                        reqCode=tripPresenter.getRequestCode();
+                        curTrip.setRequestCode(reqCode);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
                         tripPresenter.addNewTrip(curTrip);
                     }else{  //editTrip
                         curTrip.setId(trip.getId());
@@ -160,6 +163,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                         // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
                         finish();
                     }
+                    startAlarm(calendar,curTrip);
                 }else{
                     Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
                 }
@@ -216,16 +220,17 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void startAlarm(Calendar c) {
-        //reqCode++;
+    private void startAlarm(Calendar c,Trip curTrip) {
+
         AlarmManager alarmang = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderBroadcast.class);
-        int requestCode;
-        if(purpose.equals("newTrip"))
-            requestCode=reqCode++;
-        else
-            requestCode=trip.getRequestCode();
-        PendingIntent pi =  PendingIntent.getBroadcast(this , requestCode, intent , 0);
+            intent.putExtra("id",curTrip.getId());
+            intent.putExtra("reqCode",curTrip.getRequestCode()+"");
+            intent.putExtra("endPoint",curTrip.getEndPoint());
+            intent.putExtra("lati",curTrip.getLatitude()+"");
+            intent.putExtra("long",curTrip.getLongtiude()+"");
+
+        PendingIntent pi =  PendingIntent.getBroadcast(this , curTrip.getRequestCode(), intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
 
     }

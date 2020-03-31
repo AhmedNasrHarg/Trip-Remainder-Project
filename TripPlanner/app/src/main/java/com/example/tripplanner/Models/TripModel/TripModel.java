@@ -17,11 +17,24 @@ import java.util.ArrayList;
 public class TripModel implements TripContract.IModel {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef2 = database.getReference("requestCode");
     DatabaseReference myRef = database.getReference("trips");
     ArrayList<Trip> trips=new ArrayList<>();
     TripActivity view;
+    public int reqCode;
     public TripModel(TripActivity view){
         this.view=view;
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     reqCode=dataSnapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -56,5 +69,9 @@ public class TripModel implements TripContract.IModel {
     @Override
     public void updateTrip(Trip trip) {
         myRef.child(trip.getId()).setValue(trip);
+    }
+    public int getRequestCode(){
+        myRef2.setValue(reqCode+1);
+        return reqCode;
     }
 }
