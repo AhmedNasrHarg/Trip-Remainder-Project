@@ -113,19 +113,12 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-
             android:layout_marginStart="125dp"
             android:layout_marginLeft="125dp"
             android:layout_marginTop="17dp"
             android:layout_marginEnd="142dp"
             android:layout_marginRight="142dp"
             android:layout_marginBottom="26dp"
-            android:layout_marginStart="134dp"
-            android:layout_marginLeft="134dp"
-            android:layout_marginEnd="134dp"
-            android:layout_marginRight="134dp"
-            android:layout_marginBottom="77dp"
-
             android:background="@drawable/round_btn"
             android:fontFamily="sans-serif-black"
             android:text="@string/add"
@@ -170,7 +163,6 @@
 
         <TextView
             android:id="@+id/endPoint"
-
             android:layout_width="199dp"
             android:layout_height="30dp"
             android:layout_below="@+id/startPoint"
@@ -180,34 +172,6 @@
             android:layout_marginLeft="-2dp"
             android:layout_marginTop="37dp"
             android:hint="End Point" />
-            android:layout_width="95dp"
-            android:layout_height="31dp"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="-12dp"
-            android:layout_toStartOf="@+id/place_autocomplete_fragment2"
-            android:layout_toLeftOf="@+id/place_autocomplete_fragment2"
-            android:layout_toEndOf="@+id/textView2"
-            android:layout_toRightOf="@+id/textView2" />
-
-
-        <TextView
-            android:id="@+id/tripType"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_below="@+id/switch1"
-            android:layout_alignStart="@+id/switch1"
-            android:layout_alignLeft="@+id/switch1"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="261dp"
-            android:layout_marginLeft="261dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp" />
 
     </RelativeLayout>
 

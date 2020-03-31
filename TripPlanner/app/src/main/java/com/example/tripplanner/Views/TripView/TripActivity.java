@@ -42,37 +42,35 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     Button cal;
     Button time;
-    Button addBtn;
     TextView calDate;
     TextView timeTxt;
     Calendar calendar;
-     int year;
-     int month;
-     int dayOfMonth;
-     int minute;
-     int hourOfDay;
+    int year;
+    int month;
+    int dayOfMonth;
+    int minute;
+    int hourOfDay;
 
     TripPresenter tripPresenter;
     Switch type;
     AutocompleteSupportFragment autocompleteFragment;
     AutocompleteSupportFragment autocompleteFragment2;
-    TextView tripType;
     EditText tripName;
     TextView startPoint;
     TextView endPoint;
     String toggleCheck="oneWay";
-     double endLatitude;        //new
+    double endLatitude;        //new
     double endLongtude;         //new
     double startLatitude;       //new
     double startLongtude;       //new
     String thePlaceId;          //new
-     String startPlaceName;     //new
-     String endPlaceName;       //new
+    String startPlaceName;     //new
+    String endPlaceName;       //new
     String purpose="";
     Trip trip;
     static int reqCode = 0;
 
-
+    Button addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,17 +86,14 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         type=findViewById(R.id.switch1);
         tripName=findViewById(R.id.tripName);
         startPoint=findViewById(R.id.startPoint);   startPoint.setText("Baltim");   //for testing only
-        endPoint=findViewById(R.id.endPoint);       endPoint.setText("Alexandria"); // for testing onl
-        startPoint=findViewById(R.id.startPoint);
-        endPoint=findViewById(R.id.endPoint);
+        endPoint=findViewById(R.id.endPoint);       endPoint.setText("Alexandria"); // for testing only
         calDate = findViewById(R.id.calDate);
         time = findViewById(R.id.time);
         timeTxt = findViewById(R.id.timeText);
         cal = findViewById(R.id.calendar);
         time.setBackgroundResource(R.drawable.ala);
         cal.setBackgroundResource(R.drawable.calendar7);
-        tripType.findViewById(R.id.tripType);
-       // reqCode =0;
+        // reqCode =0;
 
         // to check if am coming from add new trip or edit a trip
         Intent intent =getIntent();
@@ -111,15 +106,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             addBtn.setText("Save");
             type.setChecked(trip.getTripType().equals("round"));
             tripName.setText(trip.getTripName());
-
 //            startPoint.setText(trip.getStartPoint());   //[here]                            [heeeeeeeeereeeeeeeee]
 //
 //            endPoint.setText(trip.getEndPoint());       //[here]
             //set in start and end
-
-            //startPoint.setText(trip.getStartPoint());
-          //  endPoint.setText(trip.getEndPoint());
-
             calDate.setText(trip.getTripDate());
             timeTxt.setText(trip.getTripTime());
 
@@ -132,14 +122,14 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             calendar.set(Calendar.SECOND , 0);
 
             reqCode=trip.getRequestCode();
-             year=trip.getYear();
-             month=trip.getMonth();
-             dayOfMonth=trip.getDayOfMonth();
-             minute=trip.getMinute();
-             hourOfDay=trip.getHourOfDay();
+            year=trip.getYear();
+            month=trip.getMonth();
+            dayOfMonth=trip.getDayOfMonth();
+            minute=trip.getMinute();
+            hourOfDay=trip.getHourOfDay();
         }
 
-       type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
@@ -154,10 +144,10 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), "AIzaSyAlhcnF8gOLFVzwWJD2Gk0wR0EFVmvMf88");
         }
-         autocompleteFragment = (AutocompleteSupportFragment)
+        autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
-         autocompleteFragment2 = (AutocompleteSupportFragment)
+        autocompleteFragment2 = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
 
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
@@ -246,27 +236,27 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
 
 
-                // notifHelper = new NotificationHelper(this );
-                calendar = Calendar.getInstance();
+        // notifHelper = new NotificationHelper(this );
+        calendar = Calendar.getInstance();
 
-                cal.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        DialogFragment datePicker = new com.example.tripplanner.Views.TripView.DatePickerFrag();
-                        datePicker.show(getSupportFragmentManager(), "date picker");
-                    }
-                });
+        cal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-                time.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DialogFragment timePicker = new TimePickerFrag();
-                        timePicker.show(getSupportFragmentManager(), "Time picker");  //calls notifiction function
-                    }
-                });
+                DialogFragment datePicker = new com.example.tripplanner.Views.TripView.DatePickerFrag();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFrag();
+                timePicker.show(getSupportFragmentManager(), "Time picker");  //calls notifiction function
+            }
+        });
 
     }
 
@@ -292,7 +282,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         calendar.set(Calendar.HOUR_OF_DAY , hourOfDay);
         calendar.set(Calendar.SECOND , 0);
         timeTxt.setText(String.valueOf(hourOfDay)+ " : " + String.valueOf(minute));
-    //    startAlarm(c);
+        //    startAlarm(c);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -300,11 +290,11 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
         AlarmManager alarmang = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderBroadcast.class);
-            intent.putExtra("id",curTrip.getId());
-            intent.putExtra("reqCode",curTrip.getRequestCode()+"");
-            intent.putExtra("endPoint",curTrip.getEndPlaceName());
-            intent.putExtra("lati",curTrip.getEndLatitude()+"");
-            intent.putExtra("long",curTrip.getEndLongtude()+"");
+        intent.putExtra("id",curTrip.getId());
+        intent.putExtra("reqCode",curTrip.getRequestCode()+"");
+        intent.putExtra("endPoint",curTrip.getEndPlaceName());
+        intent.putExtra("lati",curTrip.getEndLatitude()+"");
+        intent.putExtra("long",curTrip.getEndLongtude()+"");
 
         PendingIntent pi =  PendingIntent.getBroadcast(this , curTrip.getRequestCode(), intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
@@ -314,7 +304,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     @Override
     public void addedNewTrip() {
         finish();
-    } //ok
+    } 
 }
 
 
