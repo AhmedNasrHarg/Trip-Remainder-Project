@@ -45,6 +45,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     Button cal;
     Button time;
+    Button addBtn;
     TextView calDate;
     TextView timeTxt;
     Calendar calendar;
@@ -56,7 +57,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
     TripPresenter tripPresenter;
     Switch type;
-
+    TextView tripType;
     EditText tripName;
     TextView startPoint;
     TextView endPoint;
@@ -72,7 +73,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     Trip trip;
     static int reqCode = 0;
 
-    Button addBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,14 +87,15 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         addBtn=findViewById(R.id.addTripBtn);
         type=findViewById(R.id.switch1);
         tripName=findViewById(R.id.tripName);
-//        startPoint=findViewById(R.id.startPoint);
-//        endPoint=findViewById(R.id.endPoint);
+        startPoint=findViewById(R.id.startPoint);
+        endPoint=findViewById(R.id.endPoint);
         calDate = findViewById(R.id.calDate);
         time = findViewById(R.id.time);
         timeTxt = findViewById(R.id.timeText);
         cal = findViewById(R.id.calendar);
         time.setBackgroundResource(R.drawable.ala);
         cal.setBackgroundResource(R.drawable.calendar7);
+        tripType.findViewById(R.id.tripType);
        // reqCode =0;
 
         // to check if am coming from add new trip or edit a trip
@@ -106,8 +108,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             addBtn.setText("Save");
             type.setChecked(trip.getTripType().equals("round"));
             tripName.setText(trip.getTripName());
-            startPoint.setText(trip.getStartPoint());
-            endPoint.setText(trip.getEndPoint());
+            //startPoint.setText(trip.getStartPoint());
+          //  endPoint.setText(trip.getEndPoint());
             calDate.setText(trip.getTripDate());
             timeTxt.setText(trip.getTripTime());
 

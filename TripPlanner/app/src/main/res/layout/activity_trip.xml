@@ -196,7 +196,6 @@
             android:id="@+id/addTripBtn"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
-            android:layout_below="@+id/switch1"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
@@ -204,10 +203,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="134dp"
             android:layout_marginLeft="134dp"
-            android:layout_marginTop="17dp"
             android:layout_marginEnd="134dp"
             android:layout_marginRight="134dp"
-            android:layout_marginBottom="121dp"
+            android:layout_marginBottom="77dp"
             android:background="@drawable/round_btn"
             android:fontFamily="sans-serif-black"
             android:text="@string/add"
@@ -260,7 +258,7 @@
             android:layout_toRightOf="@+id/textView" />
 
         <TextView
-            android:id="@+id/EndPoint"
+            android:id="@+id/endPoint"
             android:layout_width="95dp"
             android:layout_height="31dp"
             android:layout_alignBottom="@+id/textView2"
@@ -273,6 +271,21 @@
             android:layout_toLeftOf="@+id/place_autocomplete_fragment2"
             android:layout_toEndOf="@+id/textView2"
             android:layout_toRightOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/tripType"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_below="@+id/switch1"
+            android:layout_alignStart="@+id/switch1"
+            android:layout_alignLeft="@+id/switch1"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="261dp"
+            android:layout_marginLeft="261dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp" />
 
     </RelativeLayout>
 
