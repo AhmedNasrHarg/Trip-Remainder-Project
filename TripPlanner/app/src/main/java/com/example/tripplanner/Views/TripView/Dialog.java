@@ -63,7 +63,7 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
         snooze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // finish();   // what is this finish??????????????????????/
+               // finish();   // what is this finish??????????????????????///
 //                hide();
                 moveTaskToBack(true);
 //                Dialog.this.dismissDialog(0);
