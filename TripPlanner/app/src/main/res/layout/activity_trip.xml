@@ -135,7 +135,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginLeft="48dp"
             android:layout_marginTop="50dp"
-            android:hint="here is date" />
+            android:hint="Date" />
 
         <TextView
             android:id="@+id/timeText"
@@ -147,7 +147,7 @@
             android:layout_marginStart="49dp"
             android:layout_marginLeft="49dp"
             android:layout_marginTop="52dp"
-            android:hint="here is name" />
+            android:hint="Time" />
 
         <TextView
             android:id="@+id/startPoint"

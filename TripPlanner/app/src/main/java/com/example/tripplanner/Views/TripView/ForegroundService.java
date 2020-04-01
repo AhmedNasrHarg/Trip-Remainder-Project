@@ -14,21 +14,22 @@ import androidx.core.app.NotificationCompat;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.HomeView.MainActivity;
 public class ForegroundService extends Service {
-    MediaPlayer media;
+    //MediaPlayer media;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //  media = MediaPlayer.create(this, R.raw.cool);
-        // media.setLooping(true); // Set looping
+         // media = MediaPlayer.create(this, R.raw.cool);
+       //  media.setLooping(true); // Set looping
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //    media.start();
+   //         media.start();
         String reqCode=intent.getStringExtra("reqCode");
         Intent notifiIntent = new Intent(this, Dialog.class);
-        PendingIntent pending =  PendingIntent.getActivity(this, Integer.parseInt(reqCode), notifiIntent, 0);
+
+         PendingIntent pending =  PendingIntent.getActivity(this, 1, notifiIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_ID)
                 .setContentTitle("Notification")
                 .setContentText("Take care you'll miss your trip")
@@ -44,7 +45,7 @@ public class ForegroundService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //  media.stop();
+       //   media.stop();
     }
 
 
