@@ -39,6 +39,9 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
     GoogleSignInOptions gso;
     private GoogleSignInClient mGoogleSignInClient;
     SignInButton signInButton;
+
+    boolean loginChk=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +77,13 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             public void onClick(View v) {
                 String email = emailTxt.getText().toString().trim();
                 String password = passTxt.getText().toString().trim();
-                presenter.performLogin(email, password);
-                presenter.checkLogin();
+                if(email.length()>0&&password.length()>0){
+                    loginChk=presenter.performLogin(email, password);
+//                    isLogin(loginChk);
+//                presenter.checkLogin();
+                }else{
+                    Toast.makeText(Login.this,"Fill All Fields",Toast.LENGTH_SHORT).show();
+                }
 
                 //        presenter.FirebaseGoogleAuth(acc);
             }
@@ -147,6 +155,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             startActivity(i);
             Login.this.finish();
         } else {
+            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
             Log.d("sign","onAuthStateChanged:signed_out");
         }
     }

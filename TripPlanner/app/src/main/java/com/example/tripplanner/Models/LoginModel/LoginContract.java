@@ -16,7 +16,7 @@ public class LoginContract {
     }
 
     public interface IPresenter{
-        void performLogin(String email,String password);
+        boolean performLogin(String email,String password);
         void checkLogin();
         void FirebaseGoogleAuth(GoogleSignInAccount acc);
     }
