@@ -14,13 +14,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeModel implements HomeContract.IModel {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("trips");
     ArrayList<Trip>trips=new ArrayList<>();
     MainActivity view;
+    String user;
     public HomeModel(final MainActivity view){
         this.view=view;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -32,7 +32,7 @@ public class HomeModel implements HomeContract.IModel {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Trip curTrip=snapshot.getValue(Trip.class);
-                    if(curTrip.getStatus().equals("Upcoming"))
+                    if(curTrip.getStatus().equals("Upcoming")&&curTrip.getUser().equals(user))
                         trips.add(curTrip);
                     HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
                 }
@@ -55,7 +55,7 @@ public class HomeModel implements HomeContract.IModel {
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Trip curTrip=snapshot.getValue(Trip.class);
-                    if(curTrip.getStatus().equals("Upcoming"))
+                    if(curTrip.getStatus().equals("Upcoming")&&curTrip.getUser().equals(user))
                         trips.add(curTrip);
                     HomeModel.this.view.arrayAdapter.notifyDataSetChanged();
                 }
@@ -71,6 +71,7 @@ public class HomeModel implements HomeContract.IModel {
         });
     }
     public ArrayList<Trip> getUpcomings(String user){
+        this.user=user;
         return trips;
     }
 }

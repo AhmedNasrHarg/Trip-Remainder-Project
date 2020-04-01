@@ -12,6 +12,6 @@ public class HistoryContract {
         public ArrayList<Trip> getHistory(String user);
     }
     public interface IPresenter{
-        public void handleHistory();
+        public void handleHistory(String user);
     }
 }

@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.Adapters.HistoryAdapter;
 import com.example.tripplanner.Models.HistoryModel.HistoryContract;
 import com.example.tripplanner.POJOs.Trip;
-import com.example.tripplanner.Adapters.TripAdapter;
 import com.example.tripplanner.Presenters.HistoryPresenter.HistoryPresenter;
 import com.example.tripplanner.R;
-import com.example.tripplanner.Views.HomeView.MainActivity;
 import com.example.tripplanner.Views.TripDetails.TripDetails;
 
 import java.util.ArrayList;
@@ -25,14 +23,16 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
     RecyclerView.LayoutManager recyce;
     public ArrayList<Trip> trips=new ArrayList<>();
     HistoryPresenter historyPresenter;
-
+    String user="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        user=getIntent().getExtras().getString("user");
+
         historyPresenter=new HistoryPresenter(this);
-        historyPresenter.handleHistory();
+        historyPresenter.handleHistory(user);
 
         recyclerView=findViewById(R.id.historyRecyclerView);
         recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);

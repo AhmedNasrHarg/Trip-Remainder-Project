@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     public TripAdapter arrayAdapter;
     RecyclerView.LayoutManager recyce;
     ArrayList<Trip> trips=new ArrayList<>();
-
+    String user="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,10 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
 
         // here is presenter handling
         homePresenter=new HomePresenter(this);
-        homePresenter.handleUpcomings();
+        homePresenter.handleUpcomings(user);
 
+        user=getIntent().getExtras().getString("user");
+        Toast.makeText(this,"Welcome "+user,Toast.LENGTH_SHORT).show();
 
 
         Toolbar toolbar=findViewById(R.id.toolbar_main);
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                     menuItem.setCheckable(true);
                     menuItem.setChecked(true);
                     Intent intent=new Intent(getApplicationContext(), History.class);
+                    intent.putExtra("user",user);
                     startActivity(intent);
                 }else if(id==R.id.logout){
                     menuItem.setCheckable(true);
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     protected void onStart() {
         super.onStart();
         // only add the upcoming trips, if the status is upcoming
-        homePresenter.handleUpcomings();
+        homePresenter.handleUpcomings(user);
         arrayAdapter.notifyDataSetChanged();
     }
 
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     public void addNewTrip(View view) {
         Intent intent=new Intent(this, TripActivity.class);
         intent.putExtra("purpose","newTrip");
+        intent.putExtra("user",user);
         startActivity(intent);
     }
 

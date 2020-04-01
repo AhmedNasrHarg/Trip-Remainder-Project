@@ -68,8 +68,8 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     String endPlaceName;       //new
     String purpose="";
     Trip trip;
-    static int reqCode = 0;
-
+    int reqCode = 0;
+    String user="";
     Button addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +134,9 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             dayOfMonth=trip.getDayOfMonth();
             minute=trip.getMinute();
             hourOfDay=trip.getHourOfDay();
+            user=trip.getUser();
+        }else{
+            user =intent.getExtras().getString("user");
         }
 
         type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -221,6 +224,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     curTrip.setHourOfDay(hourOfDay);
 
                     if(purpose.equals("newTrip")){
+                        curTrip.setUser(user);
                         reqCode=tripPresenter.getRequestCode();
                         curTrip.setRequestCode(reqCode);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
                         tripPresenter.addNewTrip(curTrip);

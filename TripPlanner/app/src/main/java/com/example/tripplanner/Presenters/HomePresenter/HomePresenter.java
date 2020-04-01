@@ -6,7 +6,6 @@ import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.Views.HomeView.MainActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomePresenter implements HomeContract.IPresenter {
     HomeContract.IView view;
@@ -17,8 +16,8 @@ public class HomePresenter implements HomeContract.IPresenter {
     }
 
     @Override
-    public void handleUpcomings() {
-        ArrayList<Trip> trips=model.getUpcomings("userName");
+    public void handleUpcomings(String user) {
+        ArrayList<Trip> trips=model.getUpcomings(user);
         view.renderUpcomings(trips);
     }
 }

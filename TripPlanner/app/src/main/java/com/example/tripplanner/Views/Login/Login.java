@@ -109,6 +109,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
     public void isLogin(boolean isLogin) {
         if (isLogin == true) {
             Intent i = new Intent(Login.this,MainActivity.class);
+            i.putExtra("user",emailTxt.getText().toString());
             startActivity(i);
         } else {
             Log.d("sign","onAuthStateChanged:signed_out");
@@ -130,6 +131,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         try {
             GoogleSignInAccount acc = task.getResult(ApiException.class);
             Intent i = new Intent(Login.this,MainActivity.class);
+            i.putExtra("user",acc.getEmail());
             startActivity(i);
             Toast.makeText(Login.this , "Sign In Susseful", Toast.LENGTH_LONG).show();
             presenter.FirebaseGoogleAuth(acc);

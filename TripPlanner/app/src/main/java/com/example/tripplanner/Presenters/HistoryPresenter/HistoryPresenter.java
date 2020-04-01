@@ -18,8 +18,8 @@ public class HistoryPresenter implements HistoryContract.IPresenter {
     }
 
     @Override
-    public void handleHistory() {
-        ArrayList<Trip> trips=model.getHistory("userName");
+    public void handleHistory(String user) {
+        ArrayList<Trip> trips=model.getHistory(user);
         view.renderHistory(trips);
     }
 }
