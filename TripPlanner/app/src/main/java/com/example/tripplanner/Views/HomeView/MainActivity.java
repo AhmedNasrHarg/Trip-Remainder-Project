@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true); //new
         reference = FirebaseDatabase.getInstance().getReference("trips");
+
         reference.keepSynced(true);
 
         user=getIntent().getExtras().getString("user");

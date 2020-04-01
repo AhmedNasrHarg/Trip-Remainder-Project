@@ -20,7 +20,6 @@ public class HistoryModel implements HistoryContract.IModel {
     ArrayList<Trip>trips=new ArrayList<>();
     History view;
     String user;
-
     public HistoryModel(final History view,final String user){
 //        myRef.child("test").setValue("test");
         this.view=view;

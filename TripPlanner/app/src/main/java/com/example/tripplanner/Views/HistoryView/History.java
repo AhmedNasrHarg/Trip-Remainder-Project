@@ -31,7 +31,6 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
         reference = FirebaseDatabase.getInstance().getReference("trips");
         reference.keepSynced(true);
 
