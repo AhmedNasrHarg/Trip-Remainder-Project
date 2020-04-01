@@ -11,10 +11,12 @@ public class HistoryPresenter implements HistoryContract.IPresenter {
 
     HistoryContract.IView view;
     HistoryContract.IModel model;
+    String user;
 
-    public HistoryPresenter(HistoryContract.IView view){
+    public HistoryPresenter(HistoryContract.IView view,String user){
         this.view=view;
-        this.model=new HistoryModel((History) view);
+        this.user=user;
+        this.model=new HistoryModel((History) view,user);
     }
 
     @Override

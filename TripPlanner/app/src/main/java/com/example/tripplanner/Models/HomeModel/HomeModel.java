@@ -21,8 +21,9 @@ public class HomeModel implements HomeContract.IModel {
     ArrayList<Trip>trips=new ArrayList<>();
     MainActivity view;
     String user;
-    public HomeModel(final MainActivity view){
+    public HomeModel(final MainActivity view, final String user){
         this.view=view;
+        this.user =user;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

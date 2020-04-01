@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class HomePresenter implements HomeContract.IPresenter {
     HomeContract.IView view;
     HomeContract.IModel model;
-    public HomePresenter(HomeContract.IView view){
+    String user;
+    public HomePresenter(HomeContract.IView view,String user){
        this.view=view;
-       model=new HomeModel((MainActivity) view);
+       this.user=user;
+       model=new HomeModel((MainActivity) view,user);
     }
 
     @Override

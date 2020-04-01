@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        user=getIntent().getExtras().getString("user");
         // here is presenter handling
-        homePresenter=new HomePresenter(this);
+        homePresenter=new HomePresenter(this,user);
         homePresenter.handleUpcomings(user);
 
-        user=getIntent().getExtras().getString("user");
+
         Toast.makeText(this,"Welcome "+user,Toast.LENGTH_SHORT).show();
 
 

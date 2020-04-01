@@ -21,9 +21,10 @@ public class HistoryModel implements HistoryContract.IModel {
     History view;
     String user;
 
-    public HistoryModel(final History view){
+    public HistoryModel(final History view,final String user){
 //        myRef.child("test").setValue("test");
         this.view=view;
+        this.user=user;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

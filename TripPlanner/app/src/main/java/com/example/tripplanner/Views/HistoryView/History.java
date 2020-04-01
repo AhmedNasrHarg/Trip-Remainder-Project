@@ -31,7 +31,7 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
 
         user=getIntent().getExtras().getString("user");
 
-        historyPresenter=new HistoryPresenter(this);
+        historyPresenter=new HistoryPresenter(this,user);
         historyPresenter.handleHistory(user);
 
         recyclerView=findViewById(R.id.historyRecyclerView);
