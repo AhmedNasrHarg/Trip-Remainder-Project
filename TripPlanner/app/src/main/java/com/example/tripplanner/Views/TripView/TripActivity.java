@@ -31,6 +31,7 @@ import com.example.tripplanner.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
@@ -50,7 +51,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     int dayOfMonth;
     int minute;
     int hourOfDay;
-
+    PlacesClient placesClient;
     TripPresenter tripPresenter;
     Switch type;
     AutocompleteSupportFragment autocompleteFragment;
@@ -151,17 +152,20 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         });
 
         //Auto Complete fragments
+        String apiKey = "AIzaSyBKk5YhTb5cMuBXSmXOaYBzbPzKFRhsQ38";
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyBKk5YhTb5cMuBXSmXOaYBzbPzKFRhsQ38");
+            Places.initialize(getApplicationContext(), apiKey);
+
         }
+       placesClient = Places.createClient(this);
         autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
         autocompleteFragment2 = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
 
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
-        autocompleteFragment2.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.LAT_LNG ,Place.Field.NAME));
+        autocompleteFragment2.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.LAT_LNG, Place.Field.NAME));
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
