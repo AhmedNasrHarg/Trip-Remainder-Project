@@ -24,6 +24,7 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
     String endPoint;
     String reqCode;
     String id;
+    boolean chkService=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,8 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
                 openMap();
                 Dialog.this.finish();
                 presenter.handleDoneTrip(id);
+                if(chkService)
+                    stopService(new Intent(v.getContext(),ForegroundService.class));
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -58,18 +61,19 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
             public void onClick(View v) {
                 finish();
                 presenter.handleDoneTrip(id);
+                if(chkService)
+                    stopService(new Intent(v.getContext(),ForegroundService.class));
             }
         });
         snooze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // finish();   // what is this finish??????????????????????///
-//                hide();
-                moveTaskToBack(true);
-//                Dialog.this.dismissDialog(0);
+                if(!chkService){
                 Intent intent=new Intent(v.getContext(), ForegroundService.class);
                 intent.putExtra("reqCode",reqCode);
                 startService(intent);
+                }
+                chkService=true;
             }
         });
     }
