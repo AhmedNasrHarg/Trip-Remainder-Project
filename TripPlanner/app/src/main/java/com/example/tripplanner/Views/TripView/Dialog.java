@@ -9,6 +9,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,6 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
     Intent intent;
     DialogContract.IPresenter presenter;
     String endPoint;
-    static String reqCode;
     MediaPlayer media;
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
@@ -51,41 +51,20 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
         media.setLooping(true); // Set looping
         media.start();
 
-
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                media.stop();
-
-                stopService(new Intent(Dialog.this, ForegroundService.class));
-
-                // send trip to Foreground using intent to update reqCode
-                Intent intent=new Intent(v.getContext(), ForegroundService.class);
-                intent.putExtra("reqCode",reqCode);
-                startService(intent);
-        if(savedInstanceState==null) {
-            Log.i("nasor","null");
-            endPoint = intent.getStringExtra("endPoint");
-            reqCode = intent.getStringExtra("reqCode");
-            id = intent.getStringExtra("id");
-        }else{
-            Log.i("nasor","not null");
-            endPoint = savedInstanceState.getString("endPoint");
-            reqCode = savedInstanceState.getString("reqCode");
-            id = savedInstanceState.getString("id");
-        }
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMap();
+                media.stop();
                 Dialog.this.finish();
                 presenter.handleDoneTrip(id);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(Dialog.this)) {
-
+                    Log.i("nasor","float is supported");
                     Intent intent2 = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                             Uri.parse("package:" + getPackageName()));
                     startActivityForResult(intent2, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
                 } else {
+                    Log.i("nasor","float not supported");
                     startService(new Intent(Dialog.this, FloatingViewService.class));
                 }
                 if(chkService)
@@ -96,6 +75,7 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
             @Override
             public void onClick(View v) {
                 finish();
+                media.stop();
                 presenter.handleDoneTrip(id);
                 if(chkService)
                     stopService(new Intent(v.getContext(),ForegroundService.class));
@@ -104,9 +84,7 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
         snooze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 media.stop();
-
                 if(!chkService){
                 Intent intent=new Intent(v.getContext(), ForegroundService.class);
                 intent.putExtra("reqCode",reqCode);
