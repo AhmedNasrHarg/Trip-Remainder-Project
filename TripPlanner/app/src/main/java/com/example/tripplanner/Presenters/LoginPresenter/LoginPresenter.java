@@ -55,7 +55,7 @@ public class LoginPresenter implements LoginContract.IPresenter {
     }
     @Override
     public void FirebaseGoogleAuth(GoogleSignInAccount acc) {
-        AuthCredential authCredential = GoogleAuthProvider.getCredential(null ,acc.getIdToken());
+        AuthCredential authCredential = GoogleAuthProvider.getCredential(acc.getIdToken(), null);
         auth.signInWithCredential(authCredential).addOnCompleteListener((Login) loginCont , new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         setContentView(R.layout.activity_main);
 
         user=getIntent().getExtras().getString("user");
+
         // here is presenter handling
         homePresenter=new HomePresenter(this,user);
         homePresenter.handleUpcomings(user);

@@ -20,7 +20,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,12 +29,16 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
     EditText passTxt;
     Button btnLogin;
     Button btnReg;
-    SignInButton signInButton ;
+//    SignInButton signInButton ;
     FirebaseAuth firebaseAuth;
-    GoogleSignInClient mGoogleSignInClient;
+    FirebaseUser currentUser;
+//    GoogleSignInClient mGoogleSignInClient;
     private LoginPresenter presenter;
     GoogleSignInAccount acc;
 
+    GoogleSignInOptions gso;
+    private GoogleSignInClient mGoogleSignInClient;
+    SignInButton signInButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,27 +48,17 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         passTxt = findViewById(R.id.passTxt);
         btnLogin = findViewById(R.id.btnLogin);
         btnReg = findViewById(R.id.btnReg);
-        signInButton = findViewById(R.id.btnGoogle);
         firebaseAuth = FirebaseAuth.getInstance();
         presenter = new LoginPresenter(firebaseAuth,this);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient  = GoogleSignIn.getClient(this,gso);
+        signInButton=findViewById(R.id.btnGoogle);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, 1 );
-                Login.this.finish();
-
+                startActivityForResult(signInIntent, 1);
             }
         });
-
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,57 +85,69 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = firebaseAuth.getCurrentUser();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+    public void loginWithGoogle(View v){
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 1);
+
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == 1) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        Log.i("nasor","handle");
+        try {
+            Intent intent=new Intent(Login.this,MainActivity.class);
+            intent.putExtra("user",currentUser.getEmail());
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(Login.this, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
     public void loginValidations() {
-        Toast.makeText(Login.this, "Please Fill ALL Field", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Please Fill ALL Field", Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void loginSuccess() {
-        Toast.makeText(Login.this, "Login success", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Login success", Toast.LENGTH_SHORT);
     }
 
     @Override
     public void loginError() {
-        Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT);
     }
 
 
     @Override
     public void isLogin(boolean isLogin) {
         if (isLogin == true) {
-            Intent i = new Intent(Login.this,MainActivity.class);
+            Intent i = new Intent(this,MainActivity.class);
             i.putExtra("user",emailTxt.getText().toString());
             startActivity(i);
             Login.this.finish();
         } else {
             Log.d("sign","onAuthStateChanged:signed_out");
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 ){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-
-        }
-    }
-
-    @Override
-    public void handleSignInResult(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount acc = task.getResult(ApiException.class);
-            Intent i = new Intent(Login.this,MainActivity.class);
-            i.putExtra("user",acc.getEmail());
-            startActivity(i);
-            Login.this.finish();
-            Toast.makeText(Login.this , "Sign In Susseful", Toast.LENGTH_LONG).show();
-            presenter.FirebaseGoogleAuth(acc);
-        } catch (ApiException e) {
-            Toast.makeText(Login.this , "Sign In Fail", Toast.LENGTH_LONG).show();
-            presenter.FirebaseGoogleAuth(null);
         }
     }
 
