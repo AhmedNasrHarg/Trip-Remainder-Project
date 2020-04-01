@@ -1,6 +1,8 @@
 package com.example.tripplanner.Views.Login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,10 +44,17 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
 
     boolean loginChk=false;
 
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+         sharedPreferences = getSharedPreferences("MyLogin.txt", Context.MODE_PRIVATE);
+         editor = sharedPreferences.edit();
+
 
         emailTxt = findViewById(R.id.emailTxt);
         passTxt = findViewById(R.id.passTxt);
@@ -154,6 +163,10 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             i.putExtra("user",emailTxt.getText().toString());
             startActivity(i);
             Login.this.finish();
+
+            editor.putBoolean("FirstLogin", true);
+            editor.putString("user",emailTxt.getText().toString());
+            editor.commit();
         } else {
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
             Log.d("sign","onAuthStateChanged:signed_out");

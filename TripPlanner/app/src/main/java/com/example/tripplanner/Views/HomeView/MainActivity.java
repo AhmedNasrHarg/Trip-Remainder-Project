@@ -1,6 +1,8 @@
 package com.example.tripplanner.Views.HomeView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
                     Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
                     auth.getInstance().signOut();
                     finish();
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyLogin.txt", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("FirstLogin", false);
+                    editor.commit();
                     Intent intent=new Intent(getApplicationContext(), Login.class);
                     startActivity(intent);
                 }
