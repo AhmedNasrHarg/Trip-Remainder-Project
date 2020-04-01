@@ -105,6 +105,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder>  {
                         return true;
                     case R.id.EditTrip:
                         // can edit trip ""                 [DONE]
+                        cancelAlarm(position);
                         Intent intentToEdit=new Intent(context, TripActivity.class);
                         intentToEdit.putExtra("purpose","editTrip");
                         intentToEdit.putExtra("curTrip",items.get(position));

@@ -93,7 +93,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         cal = findViewById(R.id.calendar);
         time.setBackgroundResource(R.drawable.ala);
         cal.setBackgroundResource(R.drawable.calendar7);
-        // reqCode =0;
+
 
         // to check if am coming from add new trip or edit a trip
         Intent intent =getIntent();
@@ -106,9 +106,16 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             addBtn.setText("Save");
             type.setChecked(trip.getTripType().equals("round"));
             tripName.setText(trip.getTripName());
-//            startPoint.setText(trip.getStartPoint());   //[here]                            [heeeeeeeeereeeeeeeee]
-//
-//            endPoint.setText(trip.getEndPoint());       //[here]
+            startPoint.setText(trip.getStartPlaceName());
+            endPoint.setText(trip.getEndPlaceName());
+            startLatitude=trip.getStartLatitude();
+            endLatitude=trip.getEndLatitude();
+            startLongtude=trip.getStartLongtude();
+            endLongtude=trip.getEndLongtude();
+            thePlaceId=trip.getThePlaceId();
+            startPlaceName=trip.getStartPlaceName();
+            endPlaceName=trip.getEndPlaceName();
+            reqCode=trip.getRequestCode();
             //set in start and end
             calDate.setText(trip.getTripDate());
             timeTxt.setText(trip.getTripTime());
@@ -121,7 +128,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             calendar.set(Calendar.HOUR_OF_DAY , trip.getHourOfDay());
             calendar.set(Calendar.SECOND , 0);
 
-            reqCode=trip.getRequestCode();
+
             year=trip.getYear();
             month=trip.getMonth();
             dayOfMonth=trip.getDayOfMonth();
@@ -142,7 +149,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
 
         //Auto Complete fragments
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyAlhcnF8gOLFVzwWJD2Gk0wR0EFVmvMf88");
+            Places.initialize(getApplicationContext(), "AIzaSyBKk5YhTb5cMuBXSmXOaYBzbPzKFRhsQ38");
         }
         autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -151,7 +158,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                 getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
 
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
-
+        autocompleteFragment2.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -194,7 +201,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
             public void onClick(View v) {
                 startPlaceName=startPoint.getText().toString(); //for demo only
                 endPlaceName=endPoint.getText().toString();     // for demo only
-                if(tripName.getText().toString().length()>0&&startPlaceName.length()>0&&endPlaceName.length()>0
+                if(tripName.getText().toString().length()>0&&startPoint.getText().toString().length()>0&&endPoint.getText().toString().length()>0
                         && calDate.getText().toString().length()>0&&timeTxt.getText().toString().length()>0){
 
                     Trip curTrip=new Trip(tripName.getText().toString()
@@ -219,7 +226,6 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                         tripPresenter.addNewTrip(curTrip);
                     }else{  //editTrip
                         curTrip.setId(trip.getId());
-                        Log.i("nasor","aaaaaaaaaaaaaaaaaa");
                         curTrip.setRequestCode(reqCode);      //here is a problem trip.getRequestCode()
                         tripPresenter.updateTrip(curTrip);
                         // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
@@ -296,6 +302,15 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         intent.putExtra("lati",curTrip.getEndLatitude()+"");
         intent.putExtra("long",curTrip.getEndLongtude()+"");
 
+        c.set(Calendar.YEAR , year);
+        c.set(Calendar.MONTH , month);
+        c.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+        c.set(Calendar.MINUTE , minute);
+        Log.i("nasor",minute+"");
+        Log.i("nasor",curTrip.getMinute()+"");
+        c.set(Calendar.HOUR_OF_DAY , hourOfDay);
+        c.set(Calendar.SECOND , 0);
+
         PendingIntent pi =  PendingIntent.getBroadcast(this , curTrip.getRequestCode(), intent , 0);
         alarmang.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pi);
 
@@ -304,7 +319,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
     @Override
     public void addedNewTrip() {
         finish();
-    } 
+    }
 }
 
 
