@@ -143,8 +143,6 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         } catch (ApiException e) {
             Toast.makeText(Login.this , "Sign In Fail", Toast.LENGTH_LONG).show();
             presenter.FirebaseGoogleAuth(null);
-
-
         }
     }
 

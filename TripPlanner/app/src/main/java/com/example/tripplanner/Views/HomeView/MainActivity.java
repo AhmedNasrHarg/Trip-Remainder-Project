@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,9 +15,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tripplanner.Adapters.TripAdapter;
 import com.example.tripplanner.Models.HomeModel.HomeContract;
 import com.example.tripplanner.POJOs.Trip;
-import com.example.tripplanner.Adapters.TripAdapter;
 import com.example.tripplanner.Presenters.HomePresenter.HomePresenter;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.HistoryView.History;
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         getSupportActionBar().setHomeButtonEnabled(true);
 
         NavigationView navigationView=findViewById(R.id.nav_drawer);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_textView);
+        navUsername.setText(user);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
