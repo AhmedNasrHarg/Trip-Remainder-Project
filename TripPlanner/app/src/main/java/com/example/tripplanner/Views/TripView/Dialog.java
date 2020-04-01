@@ -3,9 +3,11 @@ package com.example.tripplanner.Views.TripView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tripplanner.Models.DialogModel.DialogContract;
@@ -21,20 +23,28 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
     DialogContract.IPresenter presenter;
     String endPoint;
     String reqCode;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
+        Log.i("nasor","create");
         presenter=new DialogPresenter(this);
          intent=getIntent();
         start = findViewById(R.id.start);
         cancel = findViewById(R.id.cancel);
         snooze = findViewById(R.id.snooze);
-
-         endPoint=intent.getStringExtra("endPoint");
-         reqCode=intent.getStringExtra("reqCode");
-        final String id=intent.getStringExtra("id");
-
+        if(savedInstanceState==null) {
+            Log.i("nasor","null");
+            endPoint = intent.getStringExtra("endPoint");
+            reqCode = intent.getStringExtra("reqCode");
+            id = intent.getStringExtra("id");
+        }else{
+            Log.i("nasor","not null");
+            endPoint = savedInstanceState.getString("endPoint");
+            reqCode = savedInstanceState.getString("reqCode");
+            id = savedInstanceState.getString("id");
+        }
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,8 +53,6 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
                 presenter.handleDoneTrip(id);
             }
         });
-
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,22 +60,29 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
                 presenter.handleDoneTrip(id);
             }
         });
-
-
-
         snooze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+               // finish();   // what is this finish??????????????????????/
+//                hide();
+                moveTaskToBack(true);
+//                Dialog.this.dismissDialog(0);
                 Intent intent=new Intent(v.getContext(), ForegroundService.class);
                 intent.putExtra("reqCode",reqCode);
                 startService(intent);
-
             }
         });
-
-
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i("nasor","save");
+        outState.putString("endPoint",endPoint);
+        outState.putString("reqCode",reqCode);
+        outState.putString("id",id);
+    }
+
     public void openMap() {
 
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
