@@ -309,6 +309,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
         intent.putExtra("endPoint",curTrip.getEndPlaceName());
         intent.putExtra("lati",curTrip.getEndLatitude()+"");
         intent.putExtra("long",curTrip.getEndLongtude()+"");
+        intent.putExtra("notes",curTrip.getNotes());
 
         c.set(Calendar.YEAR , year);
         c.set(Calendar.MONTH , month);

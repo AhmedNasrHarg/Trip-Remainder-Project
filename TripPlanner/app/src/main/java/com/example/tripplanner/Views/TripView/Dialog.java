@@ -18,6 +18,8 @@ import com.example.tripplanner.Models.DialogModel.DialogContract;
 import com.example.tripplanner.Presenters.DialogPresenter.DialogPresenter;
 import com.example.tripplanner.R;
 
+import java.util.ArrayList;
+
 public class Dialog extends AppCompatActivity implements DialogContract.IView {
 
     Button start;
@@ -32,8 +34,9 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
     String reqCode;
     String id;
     boolean chkService=false;
+    ArrayList<String> notes;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
         Log.i("nasor","create");
@@ -46,6 +49,7 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
          endPoint=intent.getStringExtra("endPoint");
          reqCode=intent.getStringExtra("reqCode");
         final String id=intent.getStringExtra("id");
+        notes=intent.getStringArrayListExtra("notes");
 
         media = MediaPlayer.create(this, R.raw.cool);
         media.setLooping(true); // Set looping
@@ -59,13 +63,13 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
                 Dialog.this.finish();
                 presenter.handleDoneTrip(id);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(Dialog.this)) {
-                    Log.i("nasor","float is supported");
                     Intent intent2 = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                             Uri.parse("package:" + getPackageName()));
                     startActivityForResult(intent2, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
                 } else {
-                    Log.i("nasor","float not supported");
-                    startService(new Intent(Dialog.this, FloatingViewService.class));
+                    Intent intent=new Intent(Dialog.this, FloatingViewService.class);
+                    intent.putExtra("notes",notes);
+                    startService(intent);
                 }
                 if(chkService)
                     stopService(new Intent(v.getContext(),ForegroundService.class));
@@ -109,15 +113,14 @@ public class Dialog extends AppCompatActivity implements DialogContract.IView {
         if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
             //Check if the permission is granted or not.
             if (resultCode == RESULT_OK) {
-
-
-
-                startService(new Intent(Dialog.this, FloatingViewService.class));
+//                startService(new Intent(Dialog.this, FloatingViewService.class));
+                Intent intent=new Intent(Dialog.this, FloatingViewService.class);
+                intent.putExtra("notes",notes);
+                startService(intent);
                 finish();            } else { //Permission is not available
                 Toast.makeText(this,
                         "Draw over other app permission not available. Closing the application",
                         Toast.LENGTH_SHORT).show();
-
                 finish();
             }
         } else {

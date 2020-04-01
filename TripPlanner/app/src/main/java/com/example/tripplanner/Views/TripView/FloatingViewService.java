@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,10 +14,22 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tripplanner.Adapters.NotesAdapter;
 import com.example.tripplanner.R;
 
+import java.util.ArrayList;
+
 public class FloatingViewService extends Service {
+
+    RecyclerView recyclerView;
+    public NotesAdapter arrayAdapter;
+    RecyclerView.LayoutManager recyce;
+    public ArrayList<String> notes=new ArrayList<>();
+
+
     WindowManager windowManager;
     View floatingView;
     WindowManager.LayoutParams params;
@@ -26,10 +39,12 @@ public class FloatingViewService extends Service {
         return null;
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
+
+
+
 
         floatingView = LayoutInflater.from(this).inflate(R.layout.floathead, null);
 
@@ -72,7 +87,28 @@ public class FloatingViewService extends Service {
                 expandedView.setVisibility(View.GONE);
             }
         });
-
+        ImageView openButton = (ImageView) floatingView.findViewById(R.id.open_button);
+        openButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                collapsedView.setVisibility(View.GONE);
+                expandedView.setVisibility(View.VISIBLE);
+            }
+        });
+        /*
+      //      ImageView openButton = (ImageView) floatingView.findViewById(R.id.open_button);
+       openButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Open the application  click.
+                    Intent intent = new Intent(FloatingViewService.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    //close the service and remove view from the view hierarchy
+                    stopSelf();
+                }
+            });
+*/
 
 
         ImageView closeButtonCollapsed = (ImageView) floatingView.findViewById(R.id.close_btn);
@@ -97,6 +133,7 @@ public class FloatingViewService extends Service {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                expandedView.setVisibility(View.VISIBLE);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
 
@@ -124,27 +161,24 @@ public class FloatingViewService extends Service {
             }
 
 
-/*
-      //      ImageView openButton = (ImageView) floatingView.findViewById(R.id.open_button);
-       openButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Open the application  click.
-                    Intent intent = new Intent(FloatingViewService.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-
-
-                    //close the service and remove view from the view hierarchy
-                    stopSelf();
-                }
-            });
-*/
 
 
         });
+        recyclerView=floatingView.findViewById(R.id.notesRecyclerView2);
+        recyce = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(recyce);
+        arrayAdapter=new NotesAdapter(this,R.layout.note_row ,R.id.noteTextView,notes);
+        recyclerView.setAdapter(arrayAdapter);
 
+    }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        int ret= super.onStartCommand(intent, flags, startId);
+        notes=intent.getExtras().getStringArrayList("notes");       ///  notifyyyyyyyyy
+        arrayAdapter.notifyDataSetChanged();
+        Log.i("nasor","yarab");
+        return ret;
     }
 
     @Override
