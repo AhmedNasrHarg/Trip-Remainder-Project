@@ -15,6 +15,13 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.tripplanner.R;
 public class ForegroundService extends Service {
+    //MediaPlayer media;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+         // media = MediaPlayer.create(this, R.raw.cool);
+       //  media.setLooping(true); // Set looping
     MediaPlayer media;
     public static String CHANNEL_ID = "ServiceChannel";
     @Override
@@ -30,6 +37,11 @@ public class ForegroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+   //         media.start();
+        String reqCode=intent.getStringExtra("reqCode");
+        Intent notifiIntent = new Intent(this, Dialog.class);
+
+         PendingIntent pending =  PendingIntent.getActivity(this, 1, notifiIntent, 0);
 
         //    media.start();
         String reqCode=intent.getStringExtra("reqCode");
@@ -65,7 +77,7 @@ public class ForegroundService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //  media.stop();
+       //   media.stop();
     }
 
 

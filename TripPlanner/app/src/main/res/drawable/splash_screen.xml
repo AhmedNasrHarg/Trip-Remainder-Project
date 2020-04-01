@@ -9,13 +9,19 @@
                 android:centerColor="#ffffff"
                 android:startColor="#ffffff"
                 android:gradientRadius="400dp"
+                android:width="230dp"
+                android:height="70dp"
                 android:type="radial"/>
+
         </shape>
     </item>
     <item
         android:gravity="center">
         <bitmap
+
+
+
             android:gravity="center"
-            android:src="@drawable/log2"/>
+            android:src="@drawable/orange3"/>
     </item>
 </layer-list>
