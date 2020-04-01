@@ -28,6 +28,8 @@ import com.example.tripplanner.Views.TripDetails.TripDetails;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -42,10 +44,14 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     RecyclerView.LayoutManager recyce;
     ArrayList<Trip> trips=new ArrayList<>();
     String user="";
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        reference = FirebaseDatabase.getInstance().getReference("trips");
+        reference.keepSynced(true);
 
         user=getIntent().getExtras().getString("user");
 
