@@ -13,6 +13,8 @@ import com.example.tripplanner.POJOs.Trip;
 import com.example.tripplanner.Presenters.HistoryPresenter.HistoryPresenter;
 import com.example.tripplanner.R;
 import com.example.tripplanner.Views.TripDetails.TripDetails;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -24,10 +26,14 @@ public class History extends AppCompatActivity implements HistoryContract.IView,
     public ArrayList<Trip> trips=new ArrayList<>();
     HistoryPresenter historyPresenter;
     String user="";
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        reference = FirebaseDatabase.getInstance().getReference("trips");
+        reference.keepSynced(true);
 
         user=getIntent().getExtras().getString("user");
 
