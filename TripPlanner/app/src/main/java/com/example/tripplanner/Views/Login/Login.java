@@ -61,6 +61,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
 
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, 1 );
+                Login.this.finish();
 
             }
         });
@@ -71,6 +72,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
+                Login.this.finish();
             }
         });
 
@@ -81,6 +83,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
                 String password = passTxt.getText().toString().trim();
                 presenter.performLogin(email, password);
                 presenter.checkLogin();
+
                 //        presenter.FirebaseGoogleAuth(acc);
             }
         });
@@ -111,6 +114,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             Intent i = new Intent(Login.this,MainActivity.class);
             i.putExtra("user",emailTxt.getText().toString());
             startActivity(i);
+            Login.this.finish();
         } else {
             Log.d("sign","onAuthStateChanged:signed_out");
         }
@@ -133,6 +137,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
             Intent i = new Intent(Login.this,MainActivity.class);
             i.putExtra("user",acc.getEmail());
             startActivity(i);
+            Login.this.finish();
             Toast.makeText(Login.this , "Sign In Susseful", Toast.LENGTH_LONG).show();
             presenter.FirebaseGoogleAuth(acc);
         } catch (ApiException e) {
