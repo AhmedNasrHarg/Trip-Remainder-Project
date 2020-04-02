@@ -38,6 +38,10 @@ public class Trip implements Serializable {
     public Trip() {
     }
 
+    public void setNotes(ArrayList<String> notes) {
+        this.notes = notes;
+    }
+
     public Trip(String tripName, String tripDate, String tripTime, String tripType, String status) {
         this.tripName = tripName;
         this.tripDate = tripDate;

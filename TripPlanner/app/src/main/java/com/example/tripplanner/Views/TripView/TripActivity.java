@@ -227,6 +227,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                     curTrip.setMinute(minute);
                     curTrip.setHourOfDay(hourOfDay);
 
+
                     if(purpose.equals("newTrip")){
                         curTrip.setUser(user);
                         reqCode=tripPresenter.getRequestCode();
@@ -235,6 +236,7 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                         startAlarm(calendar,curTrip);
                     }else{  //editTrip
                         curTrip.setUser(user);
+                        curTrip.setNotes(trip.getNotes());
                         curTrip.setId(trip.getId());
                         curTrip.setRequestCode(reqCode);      //here is a problem trip.getRequestCode()
                         tripPresenter.updateTrip(curTrip);
