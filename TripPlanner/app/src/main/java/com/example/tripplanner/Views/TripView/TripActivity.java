@@ -232,14 +232,17 @@ public class TripActivity extends AppCompatActivity implements TripContract.IVie
                         reqCode=tripPresenter.getRequestCode();
                         curTrip.setRequestCode(reqCode);  // if delete it is OK, if we will edit, so update it for newTrip only [viiiiiiiiip]
                         tripPresenter.addNewTrip(curTrip);
+                        startAlarm(calendar,curTrip);
                     }else{  //editTrip
+                        curTrip.setUser(user);
                         curTrip.setId(trip.getId());
                         curTrip.setRequestCode(reqCode);      //here is a problem trip.getRequestCode()
                         tripPresenter.updateTrip(curTrip);
                         // delete or update using requestCode of "trip" object not curTrip, coz trip object is the coming one to be edited
+                        startAlarm(calendar,curTrip);
                         finish();
                     }
-                    startAlarm(calendar,curTrip);
+
                 }else{
                     Toast.makeText(getApplicationContext(),"Please fill all fields",Toast.LENGTH_SHORT).show();
                 }

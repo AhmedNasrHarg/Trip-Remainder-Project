@@ -2,9 +2,7 @@ package com.example.tripplanner.Models.TripModel;
 
 import androidx.annotation.NonNull;
 
-import com.example.tripplanner.Models.HomeModel.HomeModel;
 import com.example.tripplanner.POJOs.Trip;
-import com.example.tripplanner.Views.HomeView.MainActivity;
 import com.example.tripplanner.Views.TripView.TripActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,9 +19,10 @@ public class TripModel implements TripContract.IModel {
     DatabaseReference myRef = database.getReference("trips");
     ArrayList<Trip> trips=new ArrayList<>();
     TripActivity view;
+    String user;
     public int reqCode;
     public TripModel(TripActivity view){
-        this.view=view;
+
         myRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

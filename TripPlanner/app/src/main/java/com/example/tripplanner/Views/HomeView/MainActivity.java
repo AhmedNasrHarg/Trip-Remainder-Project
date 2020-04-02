@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -49,12 +50,13 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true); //new                   [hhhhhhhhhhhhhhhhhhhhrrrrrrrrrrrrreeeeeeeeeeeee][
+        user=getIntent().getExtras().getString("user");
+        Log.i("nasor",user);
+         //new                   [hhhhhhhhhhhhhhhhhhhhrrrrrrrrrrrrreeeeeeeeeeeee][
         reference = FirebaseDatabase.getInstance().getReference("trips");
-
         reference.keepSynced(true);
 
-        user=getIntent().getExtras().getString("user");
+
 
         // here is presenter handling
         homePresenter=new HomePresenter(this,user);
