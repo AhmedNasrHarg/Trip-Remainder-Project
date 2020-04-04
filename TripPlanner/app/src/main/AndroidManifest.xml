@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+
 
 
     <application
@@ -14,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.NotesView.NotesActivity"></activity>
+
+        <activity android:name=".Views.NotesView.NotesActivity">
+        </activity>
         <activity
             android:name=".Views.TripView.Dialog"
             android:theme="@style/Theme.AppCompat.Dialog" />

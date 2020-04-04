@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
     ArrayList<Trip> trips=new ArrayList<>();
     String user="";
     DatabaseReference reference;
+    boolean firstLoginFlag=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +57,14 @@ public class MainActivity extends AppCompatActivity implements HomeContract.IVie
         reference = FirebaseDatabase.getInstance().getReference("trips");
         reference.keepSynced(true);
 
+        // if coming from login add the trips to remainder loop over all of them add to remainder only. after they come from firebase
+        // search for await in android coz it must be after you have got all trips
+        // momkn in single event in model
 
 
         // here is presenter handling
-        homePresenter=new HomePresenter(this,user);
+        firstLoginFlag=getIntent().getExtras().getBoolean("firstLogin");;
+        homePresenter=new HomePresenter(this,user,firstLoginFlag);
         homePresenter.handleUpcomings(user);
 
 

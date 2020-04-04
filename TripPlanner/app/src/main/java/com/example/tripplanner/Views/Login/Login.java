@@ -133,6 +133,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         try {
             Intent intent=new Intent(Login.this,MainActivity.class);
             intent.putExtra("user",currentUser.getEmail());
+            intent.putExtra("firstLogin",true);          //newwwwwwwwwwww remeber to do this once [logout]
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(Login.this, "Authentication failed.",
@@ -161,6 +162,7 @@ public class Login extends AppCompatActivity implements LoginContract.IView {
         if (isLogin == true) {
             Intent i = new Intent(this,MainActivity.class);
             i.putExtra("user",emailTxt.getText().toString());
+            i.putExtra("firstLogin",true);                  //newwwwwwwwwwww remeber to do this once [logout]
             startActivity(i);
             Login.this.finish();
 

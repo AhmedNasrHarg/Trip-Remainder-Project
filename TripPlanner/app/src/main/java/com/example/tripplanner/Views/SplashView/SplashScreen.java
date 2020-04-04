@@ -17,6 +17,8 @@ public class SplashScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        database.setPersistenceEnabled(true);
         SharedPreferences sharedPreferences = getSharedPreferences("MyLogin.txt", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor=sharedPreferences.edit();
         Boolean loginCheck = sharedPreferences.getBoolean("FirstLogin", false);
@@ -26,6 +28,7 @@ public class SplashScreen extends AppCompatActivity {
 
             Intent  intent = new Intent(getApplicationContext(), MainActivity.class);   // add user
             intent.putExtra("user",user);
+            intent.putExtra("firstLogin",false);            //newwwwwwwwwwww remeber to do this once [logout]
             startActivity(intent);
         }else{
         Intent intent = new Intent(this, Login.class);

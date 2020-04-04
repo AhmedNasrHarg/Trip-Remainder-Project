@@ -11,10 +11,12 @@ public class HomePresenter implements HomeContract.IPresenter {
     HomeContract.IView view;
     HomeContract.IModel model;
     String user;
-    public HomePresenter(HomeContract.IView view,String user){
+    boolean firstLogin;
+    public HomePresenter(HomeContract.IView view,String user,boolean firstLogin){
        this.view=view;
        this.user=user;
-       model=new HomeModel((MainActivity) view,user);
+       this.firstLogin=firstLogin;               //newwwwwwwwwwww remeber to do this once [logout]
+       model=new HomeModel((MainActivity) view,user,firstLogin);
     }
 
     @Override

@@ -3,11 +3,8 @@ package com.example.tripplanner.Views.TripView;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.example.tripplanner.POJOs.Trip;
-
-import java.net.URISyntaxException;
 
 public class ReminderBroadcast extends BroadcastReceiver {
     Trip trip=new Trip();
@@ -22,8 +19,6 @@ public class ReminderBroadcast extends BroadcastReceiver {
         intentD.putExtra("lati",intent.getStringExtra("lati"));
         intentD.putExtra("long",intent.getStringExtra("long"));
         context.startActivity(intentD);
-
-
 
     }
 
