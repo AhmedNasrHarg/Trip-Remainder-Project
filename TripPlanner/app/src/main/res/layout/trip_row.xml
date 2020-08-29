@@ -112,7 +112,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/round_btn"
+        android:background="@drawable/roundshapebtn"
         android:text="Start"
         android:textColor="?attr/colorBackgroundFloating"
         android:textSize="18sp"
@@ -124,11 +124,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:background="@drawable/ic_note_black_24dp"
         android:onClick="showNotes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/startId"
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView

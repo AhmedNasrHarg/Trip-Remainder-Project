@@ -16,7 +16,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        database.setPersistenceEnabled(true);
         SharedPreferences sharedPreferences = getSharedPreferences("MyLogin.txt", Context.MODE_PRIVATE);
