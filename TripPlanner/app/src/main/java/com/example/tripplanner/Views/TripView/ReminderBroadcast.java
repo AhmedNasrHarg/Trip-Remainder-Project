@@ -12,7 +12,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Intent intentD = new Intent(context, Dialog.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intentD.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intentD.putExtra("id",intent.getStringExtra("id"));
         intentD.putExtra("reqCode",intent.getStringExtra("reqCode"));
         intentD.putExtra("endPoint",intent.getStringExtra("endPoint"));
